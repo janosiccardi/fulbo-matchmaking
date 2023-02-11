@@ -34,9 +34,98 @@
   .toolbar #youtube-logo:hover {
     opacity: 0.8;
   }
-
-  .body{
-    size: 100%;
-    background-size: 100%;
-    background-image: url("https://i.ibb.co/RpkX2VF/426529.jpg");
+  .content{
+    padding-top: 50px;
+  }
+  .players{
+    max-height: 900px !important;
+    display: flex;
+    margin-left: 60px;
+  }
+  h1 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-top: 0px;
+  }
+  h2, h3 {
+    margin-top: 5px;
+    color: #111111;
+    font-weight:normal;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+  body {
+    padding: .5rem;
+    max-width: 1000px;
+    margin: auto;
+  }
+@media (min-width: 600px) {
+    body {
+      padding: 2rem;
+    }
+  }
+  body, input[text] {
+    color: #f1efef;
+    font-family: Cambria, Georgia, serif;
+  }
+  a {
+    cursor: pointer;
+  }
+  button {
+    background-color: #eee;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: black;
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  button:hover {
+    background-color: black;
+    color: white;
+  }
+  button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: auto;
+  }
+  hr {
+    margin: 1.5rem 0;
+  }
+  input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    padding: .5rem;
+  }
+  .card{
+    margin-top: 50px;
+    background-color: #2d2d2d;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 10px 10px rgba(74, 75, 75, 0.329);
+    min-width: 450px;
+    max-width: 600px;
+    margin-right: 60px;
+    padding-top: 10px;
+  }
+  .card-centered{
+    width:12%; 
+    margin-top: 250px;
+    margin-left: 800px;
+    background-color: #2d2d2d;
+    padding: 26px;
+    padding-left: 73px;
+    border-radius: 15px;
+    box-shadow: 10px 10px rgba(74, 75, 75, 0.329);
+  }
+  .stat{
+    color: #eee;
+    font-weight:bold;    
+  }
+  .label{    
+    color: #eee;
   }
