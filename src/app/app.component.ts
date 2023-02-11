@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {Player} from '../app/player';
-import { faStar } from '@fortawesome/free-regular-svg-icons';
 
 
 @Component({
@@ -10,7 +9,6 @@ import { faStar } from '@fortawesome/free-regular-svg-icons';
 })
 export class AppComponent {
   title = 'fulbo-matchmaking';
-  faStar = faStar;
   public basic: any;
   public menu = true;
   public viewMenu = false;  
