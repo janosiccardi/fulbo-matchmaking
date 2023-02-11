@@ -70,7 +70,7 @@ export class AppComponent {
     this.players.push(eitan);
     
     let mauri  = {
-      name: "Mauricio",
+      name: "Mauri",
       finishing: 5,
       passing: 5,
       dribbling: 7,
