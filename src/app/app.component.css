@@ -120,6 +120,16 @@
     border-radius: 15px;
     box-shadow: 10px 10px rgba(74, 75, 75, 0.329);
   }
+  .card-asing-teams{
+    width:12%; 
+    margin-top: 50px;
+    margin-left: 500px;
+    background-color: #2d2d2d;
+    padding: 26px;
+    padding-left: 73px;
+    border-radius: 15px;
+    box-shadow: 10px 10px rgba(74, 75, 75, 0.329);
+  }
   .stat{
     color: #eee;
     font-weight:bold;    

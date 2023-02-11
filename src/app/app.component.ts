@@ -13,7 +13,8 @@ export class AppComponent {
   faStar = faStar;
   public basic: any;
   public menu = true;
-  public viewMenu = false;
+  public viewMenu = false;  
+  public asingTeam = false;
   public players: Array<Player> = [];
   public players2: Array<Player> = [];
   public players3: Array<Player> = [];
@@ -29,15 +30,19 @@ export class AppComponent {
 
   public viewPlayer(){
     this.menu=false;
+    this.asingTeam=false;
     this.viewMenu= true;
   }
   public asingTeams(){
-    window.open("https://www.youtube.com/watch?v=G2NjmWRps28&ab_channel=EarrapeCollection", "_blank");
+    this.menu=false;
+    this.viewMenu= false;
+    this.asingTeam=true;
   }
 
   public back(){
     this.menu=true;
     this.viewMenu= false;
+    this.asingTeam=false;
   }
   
   public getMediaColor(stat: number){
