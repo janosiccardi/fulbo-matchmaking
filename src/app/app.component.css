@@ -46,6 +46,7 @@
     color: #ffffff;
     font-size: 1.5rem;
     margin-top: 0px;
+    max-width: 450px!important;
   }
   h2, h3 {
     margin-top: 5px;
@@ -68,9 +69,6 @@
   body, input[text] {
     color: #f1efef;
     font-family: Cambria, Georgia, serif;
-  }
-  a {
-    cursor: pointer;
   }
   button {
     background-color: #eee;

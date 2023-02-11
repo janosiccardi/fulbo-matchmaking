@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Player} from '../app/player';
+import { faStar } from '@fortawesome/free-regular-svg-icons';
 
 
 @Component({
@@ -9,6 +10,7 @@ import {Player} from '../app/player';
 })
 export class AppComponent {
   title = 'fulbo-matchmaking';
+  faStar = faStar;
   public basic: any;
   public menu = true;
   public viewMenu = false;
@@ -29,14 +31,21 @@ export class AppComponent {
     this.menu=false;
     this.viewMenu= true;
   }
+  public asingTeams(){
+    window.open("https://www.youtube.com/watch?v=G2NjmWRps28&ab_channel=EarrapeCollection", "_blank");
+  }
 
   public back(){
     this.menu=true;
     this.viewMenu= false;
   }
+  
+  public getMediaColor(stat: number){
+    return stat < 75? "white": stat < 80? "#008000" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
+  }
 
-  public getColor(stat: number){
-    return stat < 3? "white": stat < 5? "#008000" : stat < 7 ? "#FFFF00" : stat < 9 ? "#FF8000" : "#FF0000";
+  public getOverall(player: Player): number {
+    return player.finishing * player.passing;
   }
   
   public chargePlayers(){
@@ -53,7 +62,7 @@ export class AppComponent {
       composure: 3,
       positioning: 1,
       vision: 1,
-      technique: 1,
+      technique: 1
     }
     this.players.push(eitan);
     
