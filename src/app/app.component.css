@@ -99,34 +99,82 @@
     width: 100%;
     padding: .5rem;
   }
-  .card{
+  .player-card{
     margin-top: 50px;
-    background-color: #2d2d2d;
+    background-color: #3a3a3a;
     padding: 25px;
     border-radius: 15px;
     box-shadow: 10px 10px rgba(74, 75, 75, 0.329);
     min-width: 450px;
-    max-width: 600px;
+    max-width: 600px!important;
     margin-right: 60px;
     padding-top: 10px;
   }
-  .card-centered{
+  .menu-card-centered{
     width:12%; 
     margin-top: 280px;
     margin-left: 810px;
-    background-color: #2d2d2d;
+    background-color: #3a3a3a;
     padding: 26px;
     padding-left: 73px;
     border-radius: 15px;
     box-shadow: 10px 10px rgba(74, 75, 75, 0.329);
+    box-sizing: unset!important;
   }
+
+  
+:host ::ng-deep .p-listbox {
+    color: rgb(255, 255, 255);
+    background-color: rgb(63, 63, 63);
+    border: 1px solid black;
+    margin-top: 30px;
+    min-height: 550px !important;
+}
+
+:host ::ng-deep .p-listbox-header {
+  background-color: rgb(34, 34, 34)!important;
+}
+
+:host ::ng-deep .p-listbox .p-listbox-list  .p-listbox-item {
+  color: white!important;
+}
+:host ::ng-deep .p-listbox-filter{
+  background-color: rgb(48, 47, 47);
+  color: white!important;
+}
+:host ::ng-deep .p-checkbox-box{
+  background-color: rgb(48, 47, 47);
+}
+:host ::ng-deep  .p-listbox .p-listbox-list .p-listbox-empty-message{
+  color: white!important
+}
+.generateButton{  
+  height: 80px;
+  margin-left: 21px;
+  width: 180px;
+  margin-top: 300px;
+}
+  .subcard{
+    width: 900px;
+    height: 650px;
+    margin-left: 5px;
+    background-color: rgb(48, 47, 47);
+    margin-top: 10px;
+    padding: 10px 25px;  
+    border: 1px solid black;
+    border-radius: 15px;
+    box-sizing: unset!important;
+  }
+  
   .card-asing-teams{
-    width:12%; 
+    box-sizing: unset!important;
+    display: flex;
+    width: 1150px;
+    height: 700px;
     margin-top: 50px;
-    margin-left: 350px;
-    background-color: #2d2d2d;
+    margin-left: 400px;
+    background-color: #3a3a3a;
     padding: 26px;
-    padding-left: 73px;
     border-radius: 15px;
     box-shadow: 10px 10px rgba(74, 75, 75, 0.329);
   }

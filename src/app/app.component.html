@@ -12,8 +12,8 @@
 <div class="content" role="main">
   <div *ngIf="viewMenu" class="players"> 
     <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let player of players; let i = index" [attr.data-index]="i">
-      <div class="card">
-        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'320px'}">{{getOverall(player)}}</span></h1>
+      <div class="player-card">
+        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'280px'}">{{getOverall(player)}}</span></h1>
           
         <div style="display: flex;">
           <div style="width:37%;display: block !important;">
@@ -49,8 +49,8 @@
   </div>
   <div *ngIf="viewMenu" class="players"> 
     <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let player of players2; let i = index" [attr.data-index]="i">
-      <div class="card">
-        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'320px'}">{{getOverall(player)}}</span></h1>
+      <div class="player-card">
+        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'280px'}">{{getOverall(player)}}</span></h1>
           
         <div style="display: flex;">
           <div style="width:37%;display: block !important;">
@@ -86,8 +86,8 @@
   </div>
   <div *ngIf="viewMenu" class="players"> 
     <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let player of players3; let i = index" [attr.data-index]="i">
-      <div class="card">
-        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'320px'}">{{getOverall(player)}}</span></h1>
+      <div class="player-card">
+        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'280px'}">{{getOverall(player)}}</span></h1>
           
         <div style="display: flex;">
           <div style="width:37%;display: block !important;">
@@ -123,8 +123,8 @@
   </div>
   <div *ngIf="viewMenu" class="players"> 
     <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let player of players4; let i = index" [attr.data-index]="i">
-      <div class="card">
-        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'320px'}">{{getOverall(player)}}</span></h1>
+      <div class="player-card">
+        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'280px'}">{{getOverall(player)}}</span></h1>
           
         <div style="display: flex;">
           <div style="width:37%;display: block !important;">
@@ -160,14 +160,30 @@
   </div>
 
   
-  <div class="card-centered" *ngIf="menu">
+  <div class="menu-card-centered" *ngIf="menu">
     <button pButton style="width: 180px;" (click)="viewPlayer()">Ver Jugadores</button>    
     <button pButton style="width: 180px;" (click)="asingTeams()" type="button">Asignar Equipos</button>
   </div>   
   
-  <div class="card-asing-teams" style="width: 1150px;height: 700px;" *ngIf="asingTeam">
+  <div class="card-asing-teams" *ngIf="asingTeam">
+    <div class="subcard" *ngIf="asingTeam">
+      
+      <h1 style="margin-top: 20px;">Seleccione los jugadores:</h1>
+      <p-listbox [options]="optionPlayers" [(ngModel)]="selectedPlayers" [metaKeySelection]="false" [checkbox]="true"
+       [filter]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'670px'}" [style]="{'width':'100%'}"
+       emptyFilterMessage="Escribí bien mogólico">
+        <ng-template let-player pTemplate="item">
+            <div class="country-item">               
+                <div>{{player.name}}</div>
+            </div>
+        </ng-template>
+    </p-listbox>
+    </div>
+    <button pButton class="generateButton" [disabled]="selectedPlayers.length != 10" (click)="generateTeams()" type="button">Generar Equipos</button>
+    <div class="subcard" style="margin-top: 0px;" *ngIf="asingTeam">
+
+    </div>
   </div> 
 
 </div>
-
 <router-outlet></router-outlet>

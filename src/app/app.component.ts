@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {Player} from '../app/player';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,6 +12,8 @@ export class AppComponent {
   public menu = true;
   public viewMenu = false;  
   public asingTeam = false;
+  public selectedPlayers: Array<Player> = [];
+  public optionPlayers: Array<Player> = [];
   public players: Array<Player> = [];
   public players2: Array<Player> = [];
   public players3: Array<Player> = [];
@@ -24,6 +25,7 @@ export class AppComponent {
     this.players2.sort((a, b) => a.name.localeCompare(b.name));
     this.players3.sort((a, b) => a.name.localeCompare(b.name));
     this.players4.sort((a, b) => a.name.localeCompare(b.name));
+    this.optionPlayers.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   public viewPlayer(){
@@ -36,6 +38,11 @@ export class AppComponent {
     this.viewMenu= false;
     this.asingTeam=true;
   }
+  
+  public generateTeams(){
+    alert(this.selectedPlayers.length);
+  }
+
 
   public back(){
     this.menu=true;
@@ -67,6 +74,7 @@ export class AppComponent {
       vision: 92,
       technique: 98
     }
+    this.optionPlayers.push(eitan);
     this.players.push(eitan);
     
     let mauri  = {
@@ -84,6 +92,7 @@ export class AppComponent {
       vision: 77,
       technique: 90,
     }
+    this.optionPlayers.push(mauri);
     this.players3.push(mauri);
 
     let jano  = {
@@ -101,6 +110,7 @@ export class AppComponent {
       vision: 84,
       technique: 63,
     }
+    this.optionPlayers.push(jano);
     this.players2.push(jano);    
 
     let iñaki  = {
@@ -118,6 +128,7 @@ export class AppComponent {
       vision: 81,
       technique: 88,
     }
+    this.optionPlayers.push(iñaki);
     this.players.push(iñaki);
 
     let fer  = {
@@ -135,6 +146,7 @@ export class AppComponent {
       vision: 58,
       technique: 63,
     }
+    this.optionPlayers.push(fer);
     this.players.push(fer);
     
     let jose  = {
@@ -152,6 +164,7 @@ export class AppComponent {
       vision: 78,
       technique: 81,
     }
+    this.optionPlayers.push(jose);
     this.players2.push(jose);
 
     let juan  = {
@@ -169,6 +182,7 @@ export class AppComponent {
       vision: 58,
       technique: 61,
     }
+    this.optionPlayers.push(juan);
     this.players2.push(juan);    
     
     let juli  = {
@@ -186,6 +200,7 @@ export class AppComponent {
       vision: 97,
       technique: 94,
     }
+    this.optionPlayers.push(juli);
     this.players3.push(juli);
 
     let percy  = {
@@ -203,6 +218,7 @@ export class AppComponent {
       vision: 55,
       technique: 60,
     }
+    this.optionPlayers.push(percy);
     this.players3.push(percy);
     
     let saimon  = {
@@ -220,6 +236,7 @@ export class AppComponent {
       vision: 93,
       technique: 96,
     }
+    this.optionPlayers.push(saimon);
     this.players4.push(saimon);
 
     let santi  = {
@@ -237,6 +254,7 @@ export class AppComponent {
       vision: 51,
       technique: 56,
     }
+    this.optionPlayers.push(santi);
     this.players4.push(santi);    
     
     let scopa  = {
@@ -254,6 +272,7 @@ export class AppComponent {
       vision: 58,
       technique: 58,
     }
+    this.optionPlayers.push(scopa);
     this.players4.push(scopa);
   }
 }
