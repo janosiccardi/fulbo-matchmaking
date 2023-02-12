@@ -13,7 +13,7 @@
   <div *ngIf="viewMenu" class="players"> 
     <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let player of players; let i = index" [attr.data-index]="i">
       <div class="player-card">
-        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(getOverall(player)),'padding-left':'280px'}">{{getOverall(player)}}</span></h1>
+        <h1><span style="min-width: 100px!important;display: inline-block;"> {{player.name + ' '}}</span><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'280px'}">{{player.overall}}</span></h1>
           
         <div style="display: flex;">
           <div style="width:37%;display: block !important;">
@@ -181,7 +181,10 @@
     </div>
     <button pButton class="generateButton" [disabled]="selectedPlayers.length != 10" (click)="generateTeams()" type="button">Generar Equipos</button>
     <div class="subcard" style="margin-top: 0px;" *ngIf="asingTeam">
-
+      <h1 style="margin-top: 20px;" *ngIf="team1.length != 0">Equipo 1:</h1>
+      <p-listbox [options]="team1" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}"></p-listbox>
+      <h1 style="margin-top: 20px;" *ngIf="team1.length != 0">Equipo 2:</h1>
+      <p-listbox [options]="team2" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}"></p-listbox>
     </div>
   </div> 
 

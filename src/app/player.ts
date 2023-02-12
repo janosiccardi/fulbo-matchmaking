@@ -21,4 +21,5 @@ export interface  Player {
     vision: number;
     composure: number;  
 
+    overall: number;
 }

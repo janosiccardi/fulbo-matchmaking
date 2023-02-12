@@ -18,6 +18,8 @@ export class AppComponent {
   public players2: Array<Player> = [];
   public players3: Array<Player> = [];
   public players4: Array<Player> = [];
+  public team1: Array<Player> = [];
+  public team2: Array<Player> = [];
   
   ngOnInit(){
     this.chargePlayers();
@@ -26,6 +28,10 @@ export class AppComponent {
     this.players3.sort((a, b) => a.name.localeCompare(b.name));
     this.players4.sort((a, b) => a.name.localeCompare(b.name));
     this.optionPlayers.sort((a, b) => a.name.localeCompare(b.name));
+    this.players.forEach(p => p.overall = this.getOverall(p));
+    this.players2.forEach(p => p.overall = this.getOverall(p));
+    this.players3.forEach(p => p.overall = this.getOverall(p));
+    this.players4.forEach(p => p.overall = this.getOverall(p));
   }
 
   public viewPlayer(){
@@ -39,10 +45,35 @@ export class AppComponent {
     this.asingTeam=true;
   }
   
-  public generateTeams(){
-    alert(this.selectedPlayers.length);
+
+  public generateTeams() {
+    let people = this.selectedPlayers;
+    let combinations = [];
+    for (let i = 0; i < 10; i++) {
+      for (let j = i + 1; j < 10; j++) {
+        for (let k = j + 1; k < 10; k++) {
+          for (let l = k + 1; l < 10; l++) {
+            for (let m = l + 1; m < 10; m++) {
+              let group1 = [people[i], people[j], people[k], people[l], people[m]];
+              let group2 = people.filter(person => !group1.includes(person));
+              let group1Score = group1.reduce((total, person) => total + person.overall, 0) / 5;
+              let group2Score = group2.reduce((total, person) => total + person.overall, 0) / 5;
+              if (Math.abs(group1Score - group2Score) <= 5) {
+                combinations.push([group1, group2]);
+              }
+            }
+          }
+        }
+      }
+    }
+    let randomNumber = this.getRandomInt(combinations.length);
+    this.team1 = combinations[randomNumber][0];    
+    this.team2 = combinations[randomNumber][1];
   }
 
+  public getRandomInt(max: number) {
+    return Math.floor(Math.random() * max);
+  }
 
   public back(){
     this.menu=true;
@@ -55,7 +86,9 @@ export class AppComponent {
   }
 
   public getOverall(player: Player): number {
-    return (Math.round(((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 7 + player.speed * 6 + player.strength * 6 + player.stamina * 10 + player.aggression * 2 + player.composure * 5 + player.positioning * 9 + player.vision * 7 + player.technique * 8) / 12) / 10)) + 30;
+    return (Math.round(((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 7 + 
+      player.speed * 6 + player.strength * 6 + player.stamina * 10 + player.aggression * 2 + player.composure * 5 + 
+      player.positioning * 9 + player.vision * 7 + player.technique * 8) / 12) / 10)) + 30;
   }
   
   public chargePlayers(){
@@ -72,8 +105,9 @@ export class AppComponent {
       composure: 63,
       positioning: 93,
       vision: 92,
-      technique: 98
-    }
+      technique: 98,
+      overall:0,
+    }    
     this.optionPlayers.push(eitan);
     this.players.push(eitan);
     
@@ -91,6 +125,7 @@ export class AppComponent {
       positioning: 73,
       vision: 77,
       technique: 90,
+      overall:0,
     }
     this.optionPlayers.push(mauri);
     this.players3.push(mauri);
@@ -109,6 +144,7 @@ export class AppComponent {
       positioning: 81,
       vision: 84,
       technique: 63,
+      overall:0,
     }
     this.optionPlayers.push(jano);
     this.players2.push(jano);    
@@ -127,6 +163,7 @@ export class AppComponent {
       positioning: 82,
       vision: 81,
       technique: 88,
+      overall:0,
     }
     this.optionPlayers.push(iñaki);
     this.players.push(iñaki);
@@ -145,6 +182,7 @@ export class AppComponent {
       positioning: 54,
       vision: 58,
       technique: 63,
+      overall:0,
     }
     this.optionPlayers.push(fer);
     this.players.push(fer);
@@ -163,6 +201,7 @@ export class AppComponent {
       positioning: 82,
       vision: 78,
       technique: 81,
+      overall:0,
     }
     this.optionPlayers.push(jose);
     this.players2.push(jose);
@@ -181,6 +220,7 @@ export class AppComponent {
       positioning: 52,
       vision: 58,
       technique: 61,
+      overall:0,
     }
     this.optionPlayers.push(juan);
     this.players2.push(juan);    
@@ -199,6 +239,7 @@ export class AppComponent {
       positioning: 95,
       vision: 97,
       technique: 94,
+      overall:0,
     }
     this.optionPlayers.push(juli);
     this.players3.push(juli);
@@ -217,6 +258,7 @@ export class AppComponent {
       positioning: 56,
       vision: 55,
       technique: 60,
+      overall:0,
     }
     this.optionPlayers.push(percy);
     this.players3.push(percy);
@@ -235,6 +277,7 @@ export class AppComponent {
       positioning: 95,
       vision: 93,
       technique: 96,
+      overall:0,
     }
     this.optionPlayers.push(saimon);
     this.players4.push(saimon);
@@ -242,17 +285,18 @@ export class AppComponent {
     let santi  = {
       name: "Santi",
       finishing: 50,
-      passing: 58,
+      passing: 51,
       dribbling: 53,
       defending: 68,
-      speed: 83,
+      speed: 76,
       strength: 81,
       stamina: 84,
       aggression: 50,
-      composure: 97,
+      composure: 94,
       positioning: 56,
       vision: 51,
       technique: 56,
+      overall:0,
     }
     this.optionPlayers.push(santi);
     this.players4.push(santi);    
@@ -267,10 +311,11 @@ export class AppComponent {
       strength: 74,
       stamina: 62,
       aggression: 53,
-      composure: 78,
+      composure: 85,
       positioning: 70,
       vision: 58,
       technique: 58,
+      overall:0,
     }
     this.optionPlayers.push(scopa);
     this.players4.push(scopa);
