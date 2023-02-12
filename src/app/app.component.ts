@@ -44,11 +44,11 @@ export class AppComponent {
   }
   
   public getMediaColor(stat: number){
-    return stat < 75? "white": stat < 80? "#008000" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
+    return stat < 60? "#white" : stat < 70 ? "#008000" : stat < 80 ? "#FFFF00" : stat < 90 ? "#FF8000" : "#FF0000";
   }
 
   public getOverall(player: Player): number {
-    return player.finishing * 0;
+    return (Math.round(((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 7 + player.speed * 6 + player.strength * 6 + player.stamina * 10 + player.aggression * 2 + player.composure * 5 + player.positioning * 9 + player.vision * 7 + player.technique * 8) / 12) / 10)) + 30;
   }
   
   public chargePlayers(){
@@ -59,7 +59,7 @@ export class AppComponent {
       dribbling: 97,
       defending: 84,
       speed: 94,
-      strength: 97,
+      strength: 95,
       stamina: 94,
       aggression: 72,
       composure: 63,
@@ -71,12 +71,12 @@ export class AppComponent {
     
     let mauri  = {
       name: "Mauri",
-      finishing: 72,
-      passing: 73,
-      dribbling: 88,
+      finishing: 81,
+      passing: 75,
+      dribbling: 89,
       defending: 66,
-      speed: 87,
-      strength: 68,
+      speed: 85,
+      strength: 83,
       stamina: 62,
       aggression: 94,
       composure: 78,
@@ -88,86 +88,86 @@ export class AppComponent {
 
     let jano  = {
       name: "Jano",
-      finishing: 3,
-      passing: 6,
-      dribbling: 2,
-      defending: 5,
-      speed: 6,
-      strength: 6,
-      stamina: 7,
-      aggression: 1,
-      composure: 8,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 62,
+      passing: 77,
+      dribbling: 64,
+      defending: 71,
+      speed: 78,
+      strength: 79,
+      stamina: 82,
+      aggression: 50,
+      composure: 87,
+      positioning: 81,
+      vision: 84,
+      technique: 63,
     }
     this.players2.push(jano);    
 
     let iñaki  = {
       name: "Iñako",
-      finishing: 7,
-      passing: 6,
-      dribbling: 9,
-      defending: 7,
-      speed: 10,
-      strength: 8,
-      stamina: 10,
-      aggression: 7,
-      composure: 8,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 84,
+      passing: 80,
+      dribbling: 95,
+      defending: 85,
+      speed: 96,
+      strength: 91,
+      stamina: 99,
+      aggression: 83,
+      composure: 87,
+      positioning: 82,
+      vision: 81,
+      technique: 88,
     }
     this.players.push(iñaki);
 
     let fer  = {
       name: "Fer",
-      finishing: 1,
-      passing: 4,
-      dribbling: 5,
-      defending: 8,
-      speed: 5,
-      strength: 9,
-      stamina: 2,
-      aggression: 7,
-      composure: 6,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 51,
+      passing: 63,
+      dribbling: 67,
+      defending: 88,
+      speed: 63,
+      strength: 98,
+      stamina: 57,
+      aggression: 87,
+      composure: 78,
+      positioning: 54,
+      vision: 58,
+      technique: 63,
     }
     this.players.push(fer);
     
     let jose  = {
       name: "Jose",
-      finishing: 3,
-      passing: 6,
-      dribbling: 5,
-      defending: 5,
-      speed:6,
-      strength: 5,
-      stamina: 1,
-      aggression: 4,
-      composure: 7,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 58,
+      passing: 77,
+      dribbling: 78,
+      defending: 75,
+      speed:80,
+      strength: 78,
+      stamina: 55,
+      aggression: 68,
+      composure: 83,
+      positioning: 82,
+      vision: 78,
+      technique: 81,
     }
     this.players2.push(jose);
 
     let juan  = {
       name: "Juan",
-      finishing: 1,
-      passing: 4,
-      dribbling: 1,
-      defending: 7,
-      speed: 5,
-      strength: 6,
-      stamina: 5,
-      aggression: 10,
-      composure: 9,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 51,
+      passing: 63,
+      dribbling: 52,
+      defending: 81,
+      speed: 74,
+      strength: 81,
+      stamina: 75,
+      aggression: 99,
+      composure: 93,
+      positioning: 52,
+      vision: 58,
+      technique: 61,
     }
     this.players2.push(juan);    
     
@@ -190,18 +190,18 @@ export class AppComponent {
 
     let percy  = {
       name: "Percy",
-      finishing: 3,
-      passing: 4,
-      dribbling: 1,
-      defending: 1,
-      speed: 1,
-      strength: 1,
-      stamina: 1,
-      aggression: 1,
-      composure: 1,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 56,
+      passing: 58,
+      dribbling: 57,
+      defending: 63,
+      speed: 71,
+      strength: 76,
+      stamina: 86,
+      aggression: 52,
+      composure: 84,
+      positioning: 56,
+      vision: 55,
+      technique: 60,
     }
     this.players3.push(percy);
     
@@ -224,35 +224,35 @@ export class AppComponent {
 
     let santi  = {
       name: "Santi",
-      finishing: 1,
-      passing: 2,
-      dribbling: 1,
-      defending: 4,
-      speed: 6,
-      strength: 5,
-      stamina: 7,
-      aggression: 1,
-      composure: 10,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 50,
+      passing: 58,
+      dribbling: 53,
+      defending: 68,
+      speed: 83,
+      strength: 81,
+      stamina: 84,
+      aggression: 50,
+      composure: 97,
+      positioning: 56,
+      vision: 51,
+      technique: 56,
     }
     this.players4.push(santi);    
     
     let scopa  = {
       name: "Scopa",
-      finishing: 1,
-      passing: 1,
-      dribbling: 1,
-      defending: 1,
-      speed: 1,
-      strength: 1,
-      stamina: 1,
-      aggression: 1,
-      composure: 1,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 54,
+      passing: 56,
+      dribbling: 55,
+      defending: 61,
+      speed: 68,
+      strength: 74,
+      stamina: 62,
+      aggression: 53,
+      composure: 78,
+      positioning: 70,
+      vision: 58,
+      technique: 58,
     }
     this.players4.push(scopa);
   }
