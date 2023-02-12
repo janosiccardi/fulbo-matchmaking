@@ -48,41 +48,41 @@ export class AppComponent {
   }
 
   public getOverall(player: Player): number {
-    return player.finishing * player.passing;
+    return player.finishing * 0;
   }
   
   public chargePlayers(){
     let eitan  = {
       name: "Eitan",
-      finishing: 8,
-      passing: 7,
-      dribbling: 10,
-      defending: 7,
-      speed: 9,
-      strength: 10,
-      stamina: 9,
-      aggression: 5,
-      composure: 3,
-      positioning: 1,
-      vision: 1,
-      technique: 1
+      finishing: 87,
+      passing: 83,
+      dribbling: 97,
+      defending: 84,
+      speed: 94,
+      strength: 97,
+      stamina: 94,
+      aggression: 72,
+      composure: 63,
+      positioning: 93,
+      vision: 92,
+      technique: 98
     }
     this.players.push(eitan);
     
     let mauri  = {
       name: "Mauri",
-      finishing: 5,
-      passing: 5,
-      dribbling: 7,
-      defending: 4,
-      speed: 8,
-      strength: 4,
-      stamina: 3,
-      aggression: 9,
-      composure: 6,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 72,
+      passing: 73,
+      dribbling: 88,
+      defending: 66,
+      speed: 87,
+      strength: 68,
+      stamina: 62,
+      aggression: 94,
+      composure: 78,
+      positioning: 73,
+      vision: 77,
+      technique: 90,
     }
     this.players3.push(mauri);
 
@@ -173,18 +173,18 @@ export class AppComponent {
     
     let juli  = {
       name: "Juli",
-      finishing: 8,
-      passing: 10,
-      dribbling: 6,
-      defending: 7,
-      speed: 5,
-      strength: 8,
-      stamina: 8,
-      aggression: 2,
-      composure: 8,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 88,
+      passing: 98,
+      dribbling: 84,
+      defending: 83,
+      speed: 73,
+      strength: 89,
+      stamina: 88,
+      aggression: 57,
+      composure: 89,
+      positioning: 95,
+      vision: 97,
+      technique: 94,
     }
     this.players3.push(juli);
 
@@ -207,18 +207,18 @@ export class AppComponent {
     
     let saimon  = {
       name: "Saimon",
-      finishing: 10,
-      passing: 8,
-      dribbling: 9,
-      defending: 7,
-      speed: 7,
-      strength: 8,
-      stamina: 7,
-      aggression: 2,
-      composure: 9,
-      positioning: 1,
-      vision: 1,
-      technique: 1,
+      finishing: 97,
+      passing: 87,
+      dribbling: 98,
+      defending: 85,
+      speed: 80,
+      strength: 86,
+      stamina: 81,
+      aggression: 58,
+      composure: 91,
+      positioning: 95,
+      vision: 93,
+      technique: 96,
     }
     this.players4.push(saimon);
 
