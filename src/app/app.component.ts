@@ -115,8 +115,6 @@ export class AppComponent {
       overall:0,
     }    
     this.players.push(eitan);
-    this.players.push(eitan);
-    this.players.push(eitan);
     
     let mauri  = {
       name: "Mauri",

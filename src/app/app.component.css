@@ -99,7 +99,7 @@
     display: grid;
     margin-left: 110px;  
     grid-template-columns: repeat(3, 1fr);    
-    margin-top: 50px;
+    margin-top: 45px;
   }
   .player-card{
     margin-top: 0px;
@@ -110,7 +110,7 @@
     min-width: 450px;
     max-width: 600px!important;
     margin-right: 60px;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
     padding-top: 10px;
   }
   .menu-card-centered{

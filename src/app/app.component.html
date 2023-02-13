@@ -59,11 +59,11 @@
       
       <h1 style="margin-top: 20px;">Seleccione los jugadores:</h1>
       <p-listbox [options]="players" [(ngModel)]="selectedPlayers" [metaKeySelection]="false" [checkbox]="true"
-       [filter]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'670px'}" [style]="{'width':'100%'}"
+       [filter]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'500px'}" [style]="{'width':'100%'}"
        emptyFilterMessage="Escribí bien mogólico">
         <ng-template let-player pTemplate="item">
             <div class="country-item">               
-              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'255px'}">{{player.overall.toFixed(1)}}</span></div>
+              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'225px'}">{{player.overall.toFixed(1)}}</span></div>
             </div>
         </ng-template>
     </p-listbox>
