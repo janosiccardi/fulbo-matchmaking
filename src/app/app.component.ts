@@ -20,7 +20,9 @@ export class AppComponent {
   public players4: Array<Player> = [];
   public team1: Array<Player> = [];
   public team2: Array<Player> = [];
-  
+  public score1: number = 0;  
+  public score2: number = 0;
+
   ngOnInit(){
     this.chargePlayers();
     this.players.sort((a, b) => a.name.localeCompare(b.name));
@@ -69,6 +71,9 @@ export class AppComponent {
     let randomNumber = this.getRandomInt(combinations.length);
     this.team1 = combinations[randomNumber][0];    
     this.team2 = combinations[randomNumber][1];
+    this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / 5;
+    this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / 5;
+
   }
 
   public getRandomInt(max: number) {
@@ -86,9 +91,9 @@ export class AppComponent {
   }
 
   public getOverall(player: Player): number {
-    return (Math.round(((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 7 + 
+    return (((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 7 + 
       player.speed * 6 + player.strength * 6 + player.stamina * 10 + player.aggression * 2 + player.composure * 5 + 
-      player.positioning * 9 + player.vision * 7 + player.technique * 8) / 12) / 10)) + 30;
+      player.positioning * 9 + player.vision * 7 + player.technique * 8) / 12) / 10) + 30;
   }
   
   public chargePlayers(){
@@ -102,7 +107,7 @@ export class AppComponent {
       strength: 95,
       stamina: 97,
       aggression: 71,
-      composure: 63,
+      composure: 57,
       positioning: 93,
       vision: 92,
       technique: 97,
@@ -273,7 +278,7 @@ export class AppComponent {
       strength: 86,
       stamina: 81,
       aggression: 58,
-      composure: 91,
+      composure: 92,
       positioning: 95,
       vision: 93,
       technique: 96,
