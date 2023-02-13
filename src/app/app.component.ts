@@ -60,7 +60,7 @@ export class AppComponent {
               let group2 = people.filter(person => !group1.includes(person));
               let group1Score = group1.reduce((total, person) => total + person.overall, 0) / 5;
               let group2Score = group2.reduce((total, person) => total + person.overall, 0) / 5;
-              if (Math.abs(group1Score - group2Score) <= 4) {
+              if (Math.abs(group1Score - group2Score) < 2.5) {
                 combinations.push([group1, group2]);
               }
             }
@@ -73,9 +73,21 @@ export class AppComponent {
     this.team2 = combinations[randomNumber][1];
     this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / 5;
     this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / 5;
+    this.team1.sort((a, b) => this.compare(a.overall,b.overall));
+    this.team2.sort((a, b) => this.compare(a.overall,b.overall));
 
   }
+  public compare(a:number, b:number) {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  }
 
+  
   public getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
   }
