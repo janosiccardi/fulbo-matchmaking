@@ -2,6 +2,7 @@
 body{
     background-image: url("https://i.ibb.co/P4m1K3s/fondo.png");
     background-size: 105%;
-
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     
 }

@@ -9,7 +9,7 @@
   }
 
   .toolbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -36,11 +36,6 @@
   }
   .content{
     padding-top: 50px;
-  }
-  .players{
-    max-height: 900px !important;
-    display: flex;
-    margin-left: 60px;
   }
   h1 {
     color: #ffffff;
@@ -99,8 +94,15 @@
     width: 100%;
     padding: .5rem;
   }
-  .player-card{
+  .players{
+    max-height: 900px !important;
+    display: grid;
+    margin-left: 110px;  
+    grid-template-columns: repeat(3, 1fr);    
     margin-top: 50px;
+  }
+  .player-card{
+    margin-top: 0px;
     background-color: #3a3a3a;
     padding: 25px;
     border-radius: 15px;
@@ -108,6 +110,7 @@
     min-width: 450px;
     max-width: 600px!important;
     margin-right: 60px;
+    margin-bottom: 50px;
     padding-top: 10px;
   }
   .menu-card-centered{

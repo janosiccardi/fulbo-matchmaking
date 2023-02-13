@@ -13,11 +13,7 @@ export class AppComponent {
   public viewMenu = false;  
   public asingTeam = false;
   public selectedPlayers: Array<Player> = [];
-  public optionPlayers: Array<Player> = [];
   public players: Array<Player> = [];
-  public players2: Array<Player> = [];
-  public players3: Array<Player> = [];
-  public players4: Array<Player> = [];
   public team1: Array<Player> = [];
   public team2: Array<Player> = [];
   public score1: number = 0;  
@@ -26,14 +22,7 @@ export class AppComponent {
   ngOnInit(){
     this.chargePlayers();
     this.players.sort((a, b) => a.name.localeCompare(b.name));
-    this.players2.sort((a, b) => a.name.localeCompare(b.name));
-    this.players3.sort((a, b) => a.name.localeCompare(b.name));
-    this.players4.sort((a, b) => a.name.localeCompare(b.name));
-    this.optionPlayers.sort((a, b) => a.name.localeCompare(b.name));
     this.players.forEach(p => p.overall = this.getOverall(p));
-    this.players2.forEach(p => p.overall = this.getOverall(p));
-    this.players3.forEach(p => p.overall = this.getOverall(p));
-    this.players4.forEach(p => p.overall = this.getOverall(p));
   }
 
   public viewPlayer(){
@@ -68,7 +57,6 @@ export class AppComponent {
         }
       }
     }
-    console.log(combinations.length);
     let randomNumber = this.getRandomInt(combinations.length);
     this.team1 = combinations[randomNumber][0];    
     this.team2 = combinations[randomNumber][1];
@@ -126,7 +114,8 @@ export class AppComponent {
       technique: 97,
       overall:0,
     }    
-    this.optionPlayers.push(eitan);
+    this.players.push(eitan);
+    this.players.push(eitan);
     this.players.push(eitan);
     
     let mauri  = {
@@ -145,8 +134,7 @@ export class AppComponent {
       technique: 90,
       overall:0,
     }
-    this.optionPlayers.push(mauri);
-    this.players3.push(mauri);
+    this.players.push(mauri);
 
     let jano  = {
       name: "Jano",
@@ -164,8 +152,7 @@ export class AppComponent {
       technique: 64,
       overall:0,
     }
-    this.optionPlayers.push(jano);
-    this.players2.push(jano);    
+    this.players.push(jano);
 
     let iñaki  = {
       name: "Iñako",
@@ -183,7 +170,6 @@ export class AppComponent {
       technique: 88,
       overall:0,
     }
-    this.optionPlayers.push(iñaki);
     this.players.push(iñaki);
 
     let fer  = {
@@ -202,7 +188,6 @@ export class AppComponent {
       technique: 63,
       overall:0,
     }
-    this.optionPlayers.push(fer);
     this.players.push(fer);
     
     let jose  = {
@@ -221,8 +206,7 @@ export class AppComponent {
       technique: 81,
       overall:0,
     }
-    this.optionPlayers.push(jose);
-    this.players2.push(jose);
+    this.players.push(jose);
 
     let juan  = {
       name: "Juan",
@@ -240,8 +224,7 @@ export class AppComponent {
       technique: 61,
       overall:0,
     }
-    this.optionPlayers.push(juan);
-    this.players2.push(juan);    
+    this.players.push(juan);
     
     let juli  = {
       name: "Juli",
@@ -259,9 +242,7 @@ export class AppComponent {
       technique: 94,
       overall:0,
     }
-    this.optionPlayers.push(juli);
-    this.players3.push(juli);
-
+    this.players.push(juli);
     let percy  = {
       name: "Percy",
       finishing: 58,
@@ -278,8 +259,7 @@ export class AppComponent {
       technique: 60,
       overall:0,
     }
-    this.optionPlayers.push(percy);
-    this.players3.push(percy);
+    this.players.push(percy);
     
     let saimon  = {
       name: "Saimon",
@@ -297,8 +277,7 @@ export class AppComponent {
       technique: 96,
       overall:0,
     }
-    this.optionPlayers.push(saimon);
-    this.players4.push(saimon);
+    this.players.push(saimon);
 
     let santi  = {
       name: "Santi",
@@ -316,8 +295,7 @@ export class AppComponent {
       technique: 53,
       overall:0,
     }
-    this.optionPlayers.push(santi);
-    this.players4.push(santi);    
+    this.players.push(santi);
     
     let scopa  = {
       name: "Scopa",
@@ -335,7 +313,6 @@ export class AppComponent {
       technique: 58,
       overall:0,
     }
-    this.optionPlayers.push(scopa);
-    this.players4.push(scopa);
+    this.players.push(scopa);
   }
 }
