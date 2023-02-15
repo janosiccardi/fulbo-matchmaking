@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import {ListboxModule} from 'primeng/listbox';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {DialogModule} from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -14,7 +18,11 @@ import {ListboxModule} from 'primeng/listbox';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ListboxModule
+    ListboxModule,    
+    DialogModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

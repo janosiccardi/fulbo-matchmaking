@@ -1,4 +1,4 @@
-export interface  Player { 
+export class  Player { 
     name: string;
     
     //Attacking 
@@ -22,4 +22,6 @@ export interface  Player {
     composure: number;  
 
     overall: number;
+    
+    cuenta: number;
 }
