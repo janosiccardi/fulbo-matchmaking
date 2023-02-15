@@ -20,7 +20,7 @@
           <button pButton class="player-button" (click)="deletePlayer(player,i)" type="button"><i class="pi pi-trash"></i></button>
           <button pButton class="player-button" (click)="editPlayer(player)" type="button"><i class="pi pi-user-edit"></i></button>
         </div>
-        <h1><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'190px'}">{{player.overall.toFixed(1)}}</span></h1>
+        <h1><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'190px'}">{{player.overall.toFixed(1) == '100.0'? '99.9' : player.overall.toFixed(1)}}</span></h1>
         </div>
         <div style="display: flex;">
           <div style="width:37%;display: block !important;">
