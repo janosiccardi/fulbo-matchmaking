@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CountRequest } from './models/count-request';
+import { AccountRequest } from './models/account-request';
 import { DeletePlayerRequest } from './models/delete-player-request.model';
 import { GenerateRequestModel } from './models/generate-teams-request.model';
 import {Player} from './models/player';
-import { CountService } from './services/count.service';
+import { AccountService } from './services/account.service';
 import { GenerateService } from './services/generate-teams.service';
 import { PlayerService } from './services/player.service';
 
@@ -19,7 +19,7 @@ export class AppComponent {
   public login = true;
   public user: string;  
   public password: string;
-  public count: number;
+  public account: number;
   public addPlayerDisplay = false;
   public editPlayerDisplay = false;
   public duplicatePlayerDisplay = false;
@@ -40,14 +40,14 @@ export class AppComponent {
   public confirmDeletePlayer: boolean;
 
   constructor(public generateService : GenerateService,
-            public countService : CountService,
+            public accountService : AccountService,
             public playerService: PlayerService) { 
   }
   ngOnInit(){
   }
 
   public getPlayers(){    
-    this.playerService.getPlayers(this.count).subscribe(data =>{
+    this.playerService.getPlayers(this.account).subscribe(data =>{
       this.players = data;
       this.players.sort((a, b) => a.name.localeCompare(b.name));     
       this.players.push(new Player());
@@ -61,7 +61,7 @@ export class AppComponent {
   }
   
   public addPlayer(){
-    this.playerToAdd.cuenta = this.count;
+    this.playerToAdd.cuenta = this.account;
     this.playerService.addPlayer(this.playerToAdd).subscribe(data =>{    
     }, error =>{
       if(error.error == "This player already exist!"){
@@ -96,7 +96,7 @@ export class AppComponent {
   }
 
   public duplicatePlayer(){
-    this.playerToDuplicate.cuenta = this.count;
+    this.playerToDuplicate.cuenta = this.account;
     this.playerService.addPlayer(this.playerToDuplicate).subscribe(data =>{    
     }, error =>{
       console.log(error);
@@ -119,7 +119,7 @@ export class AppComponent {
   }
 
   updatePlayer(){    
-    this.playerToEdit.cuenta = this.count;
+    this.playerToEdit.cuenta = this.account;
     this.playerService.updatePlayer(this.playerToEdit).subscribe(data =>{      
       this.playerToEdit.overall = this.getOverall(this.playerToEdit);
       this.playerToEdit = new Player();
@@ -168,7 +168,7 @@ export class AppComponent {
   public deletePlayer(){
     let request: DeletePlayerRequest = new DeletePlayerRequest();
     request.playerName = this.playerToDelete.name;
-    request.id = this.count;
+    request.id = this.account;
     this.playerService.deletePlayer(request).subscribe(data =>{
       this.players.splice(this.indexToDelete,1);
     });
@@ -197,11 +197,11 @@ export class AppComponent {
     this.login=false;
   }
   public loginCount(){
-    let request: CountRequest = new CountRequest();
+    let request: AccountRequest = new AccountRequest();
     request.us = this.user;
     request.pass = this.password;
-    this.countService.getCount(request).subscribe(data => {
-      this.count = data.id;
+    this.accountService.getAccount(request).subscribe(data => {
+      this.account = data.id;
       this.getPlayers();        
       this.menu=true;
       this.login= false;

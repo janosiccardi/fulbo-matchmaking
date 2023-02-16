@@ -156,7 +156,7 @@
       </div>
     </div>
     
-    <button pButton class="save" (click)="updatePlayer()" type="button">Save</button>
+    <button pButton class="save"  style="width: 100px;margin-left: 450px;" (click)="updatePlayer()" type="button">Guardar</button>
   </div> 
 </p-dialog>
 
@@ -208,7 +208,7 @@
       </div>
     </div>
     
-    <button pButton class="save" (click)="addPlayer()" type="button">Add</button>
+    <button pButton class="save"  style="width: 100px;margin-left: 450px;" (click)="addPlayer()" type="button">Agregar</button>
   </div> 
 </p-dialog>
 
@@ -260,7 +260,7 @@
       </div>
     </div>
     
-    <button pButton class="save" style="width: 100px;margin-left: 450px;" (click)="duplicatePlayer()" type="button">Duplicate</button>
+    <button pButton class="save" style="width: 100px;margin-left: 450px;" (click)="duplicatePlayer()" type="button">Duplicar</button>
   </div> 
 </p-dialog>
 
@@ -268,7 +268,7 @@
   <div class="player-card-dialog">
     <h1 style="font-size: 1.1rem!important;margin-top: 10px;"><span>{{'Esta seguro que desea eliminar el jugador "'+ playerToDelete.name+'" ?'}}</span></h1>
     <div style="display: flex;margin-top: 25px;">
-      <button pButton class="save" style="margin-left: 380px;"(click)="deletePlayer()" type="button">Yes</button>
+      <button pButton class="save" style="margin-left: 380px;"(click)="deletePlayer()" type="button">Si</button>
       <button pButton class="no"  (click)="closeDeleteDialog()" type="button">No</button>
     </div>
   </div>

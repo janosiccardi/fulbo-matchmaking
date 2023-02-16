@@ -1,8 +1,8 @@
 import { HttpClient,HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CountRequest } from "../models/count-request";
-import { Count } from "../models/count.model";
+import { AccountRequest } from "../models/account-request";
+import { Account } from "../models/account.model";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -12,13 +12,13 @@ const httpOptions = {
 @Injectable({
     providedIn: "root"
   })
-export class CountService{
-    url: string = 'http://localhost:8080/count';
+export class AccountService{
+    url: string = 'http://localhost:8080/account';
    
     constructor(private http: HttpClient) {}
 
-    getCount(request: CountRequest): Observable<Count>{
-      return this.http.post<Count>(this.url + '/get',request, httpOptions);
+    getAccount(request: AccountRequest): Observable<Account>{
+      return this.http.post<Account>(this.url + '/get',request, httpOptions);
     }
     
     
