@@ -22,8 +22,12 @@ export class AppComponent {
   public count: number;
   public addPlayerDisplay = false;
   public editPlayerDisplay = false;
+  public duplicatePlayerDisplay = false;
   public playerToEdit: Player;
   public playerToAdd : Player;
+  public playerToDelete: Player;
+  public playerToDuplicate: Player;
+  public indexToDelete: number;
   public viewMenu = false;  
   public asingTeam = false;
   public selectedPlayers: Array<Player> = [];
@@ -33,6 +37,7 @@ export class AppComponent {
   public team2: Array<Player> = [];
   public score1: number = 0;  
   public score2: number = 0;
+  public confirmDeletePlayer: boolean;
 
   constructor(public generateService : GenerateService,
             public countService : CountService,
@@ -66,6 +71,40 @@ export class AppComponent {
       this.addPlayerDisplay = false;
       this.getPlayers();
     });
+  }
+
+  public duplicate(player : Player){
+    let p : Player = new Player();
+    p.name = player.name;
+    p.finishing = player.finishing;
+    p.passing = player.passing;
+    p.technique = player.technique;
+    p.dribbling = player.dribbling;
+    p.speed = player.speed;
+    p.strength = player.strength;
+    p.stamina = player.stamina;
+    p.defending = player.defending;
+    p.aggression = player.aggression;
+    p.positioning = player.positioning;
+    p.vision = player.vision;
+    p.composure = player.composure;
+    this.playerToDuplicate = p;
+    this.duplicatePlayerDisplay = true;
+  }
+
+  public duplicatePlayer(){
+    this.playerToDuplicate.cuenta = this.count;
+    this.playerService.addPlayer(this.playerToDuplicate).subscribe(data =>{    
+    }, error =>{
+      if(error.error == "This player already exist!"){
+        alert(error.error);
+      }else{        
+      this.duplicatePlayerDisplay = false;
+      this.playerToDuplicate = new Player();
+      this.getPlayers();
+      }
+    });
+
   }
   
   editPlayer(player: Player){
@@ -111,13 +150,24 @@ export class AppComponent {
     window.location.reload();
 }
 
-  public deletePlayer(player: Player, i: number){
+  public deletePlayerDialog(player: Player, i: number){
+    this.confirmDeletePlayer = true;
+    this.playerToDelete = player;
+    this.indexToDelete = i;
+  }
+  public deletePlayer(){
     let request: DeletePlayerRequest = new DeletePlayerRequest();
-    request.playerName = player.name;
-    request.id = 1;
+    request.playerName = this.playerToDelete.name;
+    request.id = this.count;
     this.playerService.deletePlayer(request).subscribe(data =>{
-      this.players.splice(i,1);
+      this.players.splice(this.indexToDelete,1);
     });
+    this.confirmDeletePlayer = false;
+  }
+  public closeDeleteDialog(){
+    this.confirmDeletePlayer = false;
+    this.playerToDelete = new Player();
+    this.indexToDelete = -1;
   }
 
   public compare(a:number, b:number) {

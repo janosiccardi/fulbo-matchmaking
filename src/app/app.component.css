@@ -190,7 +190,20 @@
 .save:hover{
   background-color: black;
 }
-
+.no:hover{
+  background-color: black;
+}
+.no{  
+  width: 100px;
+  margin-left: 7px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 1rem;
+  width: 60px;
+  padding: 0px;
+  height: 31px;
+  background-color: red;
+}
 .player-button:hover {  
   background:none!important;
   color: white;
