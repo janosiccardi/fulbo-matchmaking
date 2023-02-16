@@ -66,9 +66,12 @@ export class AppComponent {
     }, error =>{
       if(error.error == "This player already exist!"){
         alert(error.error);
+      }else if (error.error.error == "Bad Request"){           
+        alert("Debe ingresar numeros");
+      }else{
+        this.playerToAdd = new Player();
+        this.addPlayerDisplay = false;
       }
-      this.playerToAdd = new Player();
-      this.addPlayerDisplay = false;
       this.getPlayers();
     });
   }
@@ -96,9 +99,12 @@ export class AppComponent {
     this.playerToDuplicate.cuenta = this.count;
     this.playerService.addPlayer(this.playerToDuplicate).subscribe(data =>{    
     }, error =>{
+      console.log(error);
       if(error.error == "This player already exist!"){
         alert(error.error);
-      }else{        
+      }else if (error.error.error == "Bad Request"){           
+        alert("Debe ingresar numeros");
+      }else{     
       this.duplicatePlayerDisplay = false;
       this.playerToDuplicate = new Player();
       this.getPlayers();
@@ -114,11 +120,15 @@ export class AppComponent {
 
   updatePlayer(){    
     this.playerToEdit.cuenta = this.count;
-    this.playerService.updatePlayer(this.playerToEdit).subscribe(data =>{
+    this.playerService.updatePlayer(this.playerToEdit).subscribe(data =>{      
+      this.playerToEdit.overall = this.getOverall(this.playerToEdit);
+      this.playerToEdit = new Player();
+      this.editPlayerDisplay = false;
+    },error =>{
+      if (error.error.error == "Bad Request"){           
+        alert("Debe ingresar numeros");
+      }
     });
-    this.playerToEdit.overall = this.getOverall(this.playerToEdit);
-    this.playerToEdit = new Player();
-    this.editPlayerDisplay = false;
   }
   public viewPlayer(){
     this.menu=false;
