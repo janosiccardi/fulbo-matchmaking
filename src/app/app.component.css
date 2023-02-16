@@ -159,7 +159,12 @@
   border-radius: 20px;
   font-size: 1rem;
 }
-
+.header-button{
+  background: none;
+}
+.header-button:hover{
+  background: none;
+}
 
 .add-player-button{  
   margin-top: 50px !important;

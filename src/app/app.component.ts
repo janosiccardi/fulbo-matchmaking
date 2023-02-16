@@ -27,6 +27,7 @@ export class AppComponent {
   public viewMenu = false;  
   public asingTeam = false;
   public selectedPlayers: Array<Player> = [];
+  public optionsPlayers: Array<Player> = [];
   public players: Array<Player> = [];
   public team1: Array<Player> = [];
   public team2: Array<Player> = [];
@@ -43,7 +44,7 @@ export class AppComponent {
   public getPlayers(){    
     this.playerService.getPlayers(this.count).subscribe(data =>{
       this.players = data;
-      this.players.sort((a, b) => a.name.localeCompare(b.name));
+      this.players.sort((a, b) => a.name.localeCompare(b.name));     
       this.players.push(new Player());
     });
   }
@@ -87,7 +88,10 @@ export class AppComponent {
   }
   public asingTeams(){
     this.menu=false;
-    this.viewMenu= false;
+    this.viewMenu= false; 
+    let a = this.players;
+    a.splice(a.length-1,1);
+    this.optionsPlayers = a;
     this.asingTeam=true;
   }
     public generateTeams() { 
@@ -102,6 +106,10 @@ export class AppComponent {
       this.team2.sort((a, b) => this.compare(a.overall,b.overall));
     });
   }
+
+  refresh(): void {
+    window.location.reload();
+}
 
   public deletePlayer(player: Player, i: number){
     let request: DeletePlayerRequest = new DeletePlayerRequest();
@@ -126,6 +134,7 @@ export class AppComponent {
     this.menu=true;
     this.viewMenu= false;
     this.asingTeam=false;
+    this.login=false;
   }
   public loginCount(){
     let request: CountRequest = new CountRequest();

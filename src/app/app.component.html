@@ -4,10 +4,10 @@
   <a href="history.back()"><img src="favicon.ico"/> </a>
   <span>Fulbo Matchmaking</span>
   
-    <div class="spacer"></div>
-    <a href="https://chat.whatsapp.com/DwW01Z4q2WiJqye8n9gs5u" target="_blank" rel="noopener" title="WhatsApp"><img style="width: 36px;" src="https://i.ibb.co/2qvJBMS/icons8-whatsapp-48.png" *ngIf="menu"> </a>    
+    <div class="spacer"></div>      
 
-    <a href="history.back()"><img style="width: 40px;" src="https://i.ibb.co/jRhVth7/arrow-85-48.png" title="Volver" *ngIf="!menu"> </a>
+    <button pButton class="header-button" (click)="refresh()" type="button" *ngIf="menu"><i class="pi pi-sign-out"></i></button>    
+    <button pButton class="header-button" (click)="back()" type="button" *ngIf="!menu && !login"><i class="pi pi-arrow-left"></i></button>
 </div>
 
 <div class="content" role="main">
@@ -15,12 +15,13 @@
     <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let player of players; let i = index" [attr.data-index]="i">
       <div class="player-card" *ngIf="player.finishing">
         <div class="player-header">
-        <h1 style="min-width: 50px;"><span> {{player.name + ' '}}</span></h1> 
-        <div style="display: flex;margin-left: 7px;min-width: 50px;">
+        
+        <div style="display: flex;margin-left: 0px;min-width: 120px;">
+          <h1 style=""><span> {{player.name + ' '}}</span></h1> 
           <button pButton class="player-button" (click)="deletePlayer(player,i)" type="button"><i class="pi pi-trash"></i></button>
           <button pButton class="player-button" (click)="editPlayer(player)" type="button"><i class="pi pi-user-edit"></i></button>
         </div>
-        <h1><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'190px'}">{{player.overall.toFixed(1) == '100.0'? '99.9' : player.overall.toFixed(1)}}</span></h1>
+        <h1><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'225px'}">{{player.overall.toFixed(1) == '100.0'? '99.9' : player.overall.toFixed(1)}}</span></h1>
         </div>
         <div style="display: flex;">
           <div style="width:37%;display: block !important;">
@@ -76,11 +77,11 @@
     <div class="subcard" *ngIf="asingTeam">
       
       <h1 style="margin-top: 20px;">Seleccione los jugadores:</h1>
-      <p-listbox [options]="players" [(ngModel)]="selectedPlayers" [metaKeySelection]="false" [checkbox]="true"
+      <p-listbox [options]="optionsPlayers" [(ngModel)]="selectedPlayers" [metaKeySelection]="false" [checkbox]="true"
        [filter]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'500px'}" [style]="{'width':'100%'}"
        emptyFilterMessage="Escribí bien mogólico">
         <ng-template let-player pTemplate="item">
-            <div class="country-item">               
+            <div class="country-item" *ngIf="player.finishing">               
               <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'225px'}">{{player.overall.toFixed(1)}}</span></div>
             </div>
         </ng-template>
