@@ -6,6 +6,7 @@ import {Player} from './models/player';
 import { AccountService } from './services/account.service';
 import { GenerateService } from './services/generate-teams.service';
 import { PlayerService } from './services/player.service';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent {
   public login = true;
   public user: string;  
   public password: string;
-  public account: number;
+  public account: string;
   public addPlayerDisplay = false;
   public editPlayerDisplay = false;
   public duplicatePlayerDisplay = false;
@@ -199,10 +200,10 @@ export class AppComponent {
     this.asingTeam=false;
     this.login=false;
   }
-  public loginCount(){
+  public loginAccount(){
     let request: AccountRequest = new AccountRequest();
     request.us = this.user;
-    request.pass = this.password;
+    request.pass = CryptoJS.AES.encrypt(this.password.trim(), 'fmm2023').toString();
     this.accountService.getAccount(request).subscribe(data => {
       this.account = data.id;
       this.getPlayers();        
@@ -210,6 +211,7 @@ export class AppComponent {
       this.login= false;
     });
   }
+
   public getMediaColor(stat: number){
     return stat < 60? "#white" : stat < 70 ? "#008000" : stat < 80 ? "#FFFF00" : stat < 90 ? "#FF8000" : "#FF0000";
   }

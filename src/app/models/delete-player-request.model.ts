@@ -1,6 +1,6 @@
 import { Player } from "./player";
 
 export class  DeletePlayerRequest { 
-    id: number;
+    id: string;
     playerName: string;
 }

@@ -23,5 +23,5 @@ export class  Player {
 
     overall: number;
     
-    cuenta: number;
+    cuenta: string;
 }

@@ -1,6 +1,6 @@
 
 export class  Account { 
-    id: number;
+    id: string;
     us: string;
     pass: string;
     nickname: string;
