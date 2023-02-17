@@ -138,9 +138,12 @@ export class AppComponent {
   public asingTeams(){
     this.menu=false;
     this.viewMenu= false; 
-    let a = this.players;
-    a.splice(a.length-1,1);
-    this.optionsPlayers = a;
+    this.optionsPlayers = [];
+    for(let p of this.players){
+      if(p.finishing != null && p.passing != null){
+        this.optionsPlayers.push(p);
+      }
+    }
     this.asingTeam=true;
   }
     public generateTeams() { 
