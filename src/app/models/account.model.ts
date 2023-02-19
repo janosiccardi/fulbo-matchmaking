@@ -4,4 +4,5 @@ export class  Account {
     us: string;
     pass: string;
     nickname: string;
+    smpMode: boolean;
 }

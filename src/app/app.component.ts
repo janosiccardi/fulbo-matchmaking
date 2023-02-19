@@ -7,6 +7,8 @@ import { AccountService } from './services/account.service';
 import { GenerateService } from './services/generate-teams.service';
 import { PlayerService } from './services/player.service';
 import * as CryptoJS from 'crypto-js';
+import { SaveModeRequest } from './models/save-mode-request';
+import { Account } from './models/account.model';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +43,7 @@ export class AppComponent {
   public confirmDeletePlayer: boolean;
   public smpMode: boolean;
   public combinationQty: number;
+  accountModel: Account;
 
   constructor(public generateService : GenerateService,
             public accountService : AccountService,
@@ -261,6 +264,8 @@ export class AppComponent {
       this.getPlayers();        
       this.menu=true;
       this.login= false;
+      this.accountModel = data;
+      this.smpMode = data.smpMode;
     });
   }
 
@@ -277,5 +282,12 @@ export class AppComponent {
       player.positioning * 9 + player.vision * 7 + player.technique * 8) / 12) / 10) + 29;
   }
  
+  saveMode(){
+    this.accountModel.smpMode = this.smpMode;
+    this.accountService.save( this.accountModel).subscribe(data => {
+      this.smpMode = data.smpMode;
+    });
+  }
+
 }
 

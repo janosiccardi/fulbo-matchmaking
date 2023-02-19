@@ -5,7 +5,7 @@
   
     <div class="spacer"></div>      
     <span *ngIf="!login">Modo simple:  </span>
-    <p-inputSwitch  class="switch-mode" [disabled]="this.editPlayerDisplay" [(ngModel)]="smpMode"  *ngIf="!login"></p-inputSwitch>
+    <p-inputSwitch  (onChange)="saveMode()" class="switch-mode" [disabled]="this.editPlayerDisplay" [(ngModel)]="smpMode"  *ngIf="!login"></p-inputSwitch>
     <button pButton class="header-button" title="Cerrar Sesion" (click)="refresh()" type="button" *ngIf="menu"><i class="pi pi-sign-out"></i></button>    
     <button pButton class="header-button" title="Volver" (click)="back()" type="button" *ngIf="!menu && !login"><i class="pi pi-arrow-left"></i></button>
 </div>
