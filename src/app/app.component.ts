@@ -39,6 +39,7 @@ export class AppComponent {
   public score1: number = 0;  
   public score2: number = 0;
   public confirmDeletePlayer: boolean;
+  public smpMode: boolean;
 
   constructor(public generateService : GenerateService,
             public accountService : AccountService,
@@ -55,6 +56,17 @@ export class AppComponent {
     });
   }
 
+  public getOvl(player :Player){
+    if(this.smpMode){
+      if(player.overallSmp == null || (player.overallSmp + '') == ''){
+         return '0.0';
+      }else{
+        return (player.overallSmp+'').substr(0,4);
+      }
+    }else{
+        return (player.overall == null || (player.overall + '') == '') ? '0.0' : player.overall.toFixed(1);
+    }
+  }
 
   newPlayer(){
     this.playerToAdd = new Player();
@@ -63,18 +75,22 @@ export class AppComponent {
   
   public addPlayer(){
     this.playerToAdd.cuenta = this.account;
-    this.playerService.addPlayer(this.playerToAdd).subscribe(data =>{    
-    }, error =>{
-      if(error.error == "This player already exist!"){
-        alert(error.error);
-      }else if (error.error.error == "Bad Request"){           
-        alert("Debe ingresar numeros");
-      }else{
-        this.playerToAdd = new Player();
-        this.addPlayerDisplay = false;
-      }
-      this.getPlayers();
-    });
+    if(this.validateFields(this.playerToAdd)){
+      this.playerService.addPlayer(this.playerToAdd).subscribe(data =>{    
+      }, error =>{
+        if(error.error == "This player already exist!"){
+          alert(error.error);
+        }else if (error.error.error == "Bad Request"){           
+          alert("Debe ingresar numeros");
+        }else{
+          this.playerToAdd = new Player();
+          this.addPlayerDisplay = false;
+        }
+        this.getPlayers();
+      });
+    }else{                
+      alert("Debe ingresar numeros");
+    }
   }
 
   public duplicate(player : Player){
@@ -92,25 +108,30 @@ export class AppComponent {
     p.positioning = player.positioning;
     p.vision = player.vision;
     p.composure = player.composure;
+    p.overallSmp = player.overallSmp;
     this.playerToDuplicate = p;
     this.duplicatePlayerDisplay = true;
   }
 
   public duplicatePlayer(){
     this.playerToDuplicate.cuenta = this.account;
-    this.playerService.addPlayer(this.playerToDuplicate).subscribe(data =>{    
-    }, error =>{
-      console.log(error);
-      if(error.error == "This player already exist!"){
-        alert(error.error);
-      }else if (error.error.error == "Bad Request"){           
-        alert("Debe ingresar numeros");
-      }else{     
-      this.duplicatePlayerDisplay = false;
-      this.playerToDuplicate = new Player();
-      this.getPlayers();
-      }
-    });
+    if(this.validateFields(this.playerToDuplicate)){
+      this.playerService.addPlayer(this.playerToDuplicate).subscribe(data =>{    
+      }, error =>{
+        console.log(error);
+        if(error.error == "This player already exist!"){
+          alert(error.error);
+        }else if (error.error.error == "Bad Request"){           
+          alert("Debe ingresar numeros");
+        }else{     
+        this.duplicatePlayerDisplay = false;
+        this.playerToDuplicate = new Player();
+        this.getPlayers();
+        }
+      });
+    }else{                
+      alert("Debe ingresar numeros");
+    }
 
   }
   
@@ -119,17 +140,41 @@ export class AppComponent {
     this.editPlayerDisplay = true;
   }
 
+  
+  validateFields(player: Player) {
+    if(!this.smpMode){
+      return !(player.finishing == null || (player.finishing + '') == '' ||
+          player.passing == null || (player.passing + '') == '' ||
+          player.technique == null || (player.technique + '') == '' ||
+          player.dribbling == null || (player.dribbling + '') == '' ||
+          player.speed == null || (player.speed + '') == '' ||
+          player.strength == null || (player.strength + '') == '' ||
+          player.stamina == null || (player.stamina + '') == '' ||
+          player.defending == null || (player.defending + '') == '' ||
+          player.aggression == null || (player.aggression + '') == '' ||
+          player.positioning == null ||(player.positioning + '') == '' ||
+          player.vision == null || (player.vision + '') == '' ||
+          player.composure == null || (player.composure + '') == '');
+    }else{
+      return player.overallSmp != null && (player.overallSmp + '') != '';
+    }
+  }
+
   updatePlayer(){    
     this.playerToEdit.cuenta = this.account;
-    this.playerService.updatePlayer(this.playerToEdit).subscribe(data =>{      
-      this.playerToEdit.overall = this.getOverall(this.playerToEdit);
-      this.playerToEdit = new Player();
-      this.editPlayerDisplay = false;
-    },error =>{
-      if (error.error.error == "Bad Request"){           
-        alert("Debe ingresar numeros");
-      }
-    });
+    if(this.validateFields(this.playerToEdit)){
+      this.playerService.updatePlayer(this.playerToEdit).subscribe(data =>{      
+        this.playerToEdit.overall = this.getOverall(this.playerToEdit);
+        this.playerToEdit = new Player();
+        this.editPlayerDisplay = false;
+      },error =>{
+        if (error.error.error == "Bad Request"){           
+          alert("Debe ingresar numeros");
+        }
+      });
+    }else{                
+      alert("Debe ingresar numeros");
+    }
   }
   public viewPlayer(){
     this.menu=false;
@@ -150,13 +195,18 @@ export class AppComponent {
     public generateTeams() { 
     let request: GenerateRequestModel = new GenerateRequestModel();
     request.players = this.selectedPlayers;
+    request.smpMode = this.smpMode;
     this.generateService.generateTeams(request).subscribe(data => {
-      this.team1 = data.team1;    
-      this.team2 = data.team2;     
-      this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / 5;
-      this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / 5;
-      this.team1.sort((a, b) => this.compare(a.overall,b.overall));
-      this.team2.sort((a, b) => this.compare(a.overall,b.overall));
+      if(data != null){
+        this.team1 = data.team1;    
+        this.team2 = data.team2;     
+        this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / 5;
+        this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / 5;
+        this.team1.sort((a, b) => this.compare(a.overall,b.overall));
+        this.team2.sort((a, b) => this.compare(a.overall,b.overall));
+      }else{
+        alert("Nigunga combinación posible!");
+      }
     });
   }
 
@@ -212,10 +262,13 @@ export class AppComponent {
     });
   }
 
+  public getMediaColorText(s: string){
+    let stat : number = +s;
+    return stat < 60? "#white" : stat < 70 ? "#008000" : stat < 80 ? "#FFFF00" : stat < 90 ? "#FF8000" : "#FF0000";
+  }
   public getMediaColor(stat: number){
     return stat < 60? "#white" : stat < 70 ? "#008000" : stat < 80 ? "#FFFF00" : stat < 90 ? "#FF8000" : "#FF0000";
   }
-
   public getOverall(player: Player): number {
     return (((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 7 + 
       player.speed * 5 + player.strength * 6 + player.stamina * 9 + player.aggression * 2 + player.composure * 5 + 
@@ -223,3 +276,4 @@ export class AppComponent {
   }
  
 }
+

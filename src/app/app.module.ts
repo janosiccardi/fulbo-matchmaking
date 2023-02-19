@@ -9,6 +9,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InputTextModule} from 'primeng/inputtext';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {InputTextModule} from 'primeng/inputtext';
     DialogModule,
     BrowserAnimationsModule,
     InputTextModule,
-    HttpClientModule
+    HttpClientModule,
+    InputSwitchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

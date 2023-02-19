@@ -4,7 +4,8 @@
   <span>Fulbo Matchmaking</span>
   
     <div class="spacer"></div>      
-
+    <span *ngIf="!login">Modo simple:  </span>
+    <p-inputSwitch  class="switch-mode" [disabled]="this.editPlayerDisplay" [(ngModel)]="smpMode"  *ngIf="!login"></p-inputSwitch>
     <button pButton class="header-button" title="Cerrar Sesion" (click)="refresh()" type="button" *ngIf="menu"><i class="pi pi-sign-out"></i></button>    
     <button pButton class="header-button" title="Volver" (click)="back()" type="button" *ngIf="!menu && !login"><i class="pi pi-arrow-left"></i></button>
 </div>
@@ -12,7 +13,7 @@
 <div class="content" role="main">
   <div *ngIf="viewMenu" class="players"> 
     <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let player of players; let i = index" [attr.data-index]="i">
-      <div class="player-card" *ngIf="player.finishing">
+      <div class="player-card" *ngIf="player.finishing || player.composure">
         <div class="player-header">
         
         <div style="display: flex;margin-left: 0px;min-width: 350px;">
@@ -21,9 +22,9 @@
           <button pButton class="player-button" title="Editar" (click)="editPlayer(player)" type="button"><i class="pi pi-user-edit"></i></button>
           <button pButton class="player-button" title="Duplicar" (click)="duplicate(player)" type="button"><i class="pi pi-users"></i></button>
         </div>
-        <h1><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'5px'}">{{player.overall.toFixed(1) == '100.0'? '99.9' : player.overall.toFixed(1)}}</span></h1>
+        <h1><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'5px'}">{{getOvl(player) == '100.0'? '99.9' : getOvl(player)}}</span></h1>
         </div>
-        <div style="display: flex;">
+        <div style="display: flex;" *ngIf="!smpMode">
           <div style="width:37%;display: block !important;">
             <span class="label">Finishing: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.finishing)}">{{player.finishing}}</span>
             <br>
@@ -54,7 +55,7 @@
         </div>
       </div> 
       
-      <div style="background: none;" *ngIf="!player.finishing">
+      <div style="background: none;" *ngIf="!player.finishing && !player.composure">
         <button pButton class="add-player-button" title="Agregar Jugador" (click)="newPlayer()" type="button"><i class="pi pi-user-plus"></i></button>
       </div>
     </div>
@@ -82,7 +83,7 @@
        emptyFilterMessage="Escribí bien mogólico">
         <ng-template let-player pTemplate="item">
             <div class="country-item" *ngIf="player.finishing">               
-              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'225px'}">{{player.overall.toFixed(1)}}</span></div>
+              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'225px'}">{{getOvl(player)}}</span></div>
             </div>
         </ng-template>
     </p-listbox>
@@ -93,7 +94,7 @@
       <p-listbox [options]="team1" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}">        
         <ng-template let-player pTemplate="item">
           <div class="country-item">               
-              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'270px'}">{{player.overall.toFixed(1)}}</span></div>
+              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'270px'}">{{getOvl(player)}}</span></div>
           </div>
       </ng-template>
       </p-listbox>
@@ -101,7 +102,7 @@
       <p-listbox [options]="team2" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}">             
         <ng-template let-player pTemplate="item">
           <div class="country-item">               
-              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColor(player.overall),'padding-left':'270px'}">{{player.overall.toFixed(1)}}</span></div>
+              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'270px'}">{{getOvl(player)}}</span></div>
           </div>
       </ng-template>
       </p-listbox>
@@ -109,12 +110,15 @@
   </div> 
 
 </div>
-<p-dialog [(visible)]="viewMenu && editPlayerDisplay" [draggable]="false" [resizable]="false" *ngIf="playerToEdit">
+<p-dialog [(visible)]="editPlayerDisplay" [closable]="false" [draggable]="false" [resizable]="false" *ngIf="playerToEdit">
   <div class="player-card-dialog">
-    <div class="player-header">
-    <h1 style="min-width: 50px;font-size: 2rem!important;"><span> {{playerToEdit.name + ' '}}</span></h1> 
+    <div class="player-header" style="width: 100%;">
+      <div style="display: flex;margin-left: 0px;min-width: 480px;">
+        <h1 style="min-width: 50px!important;font-size: 2rem!important;"><span> {{playerToEdit.name + ' '}}</span></h1> 
+      </div>
+      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" pInputText [(ngModel)]="playerToEdit.overallSmp" *ngIf="smpMode && editPlayerDisplay" />
     </div>
-    <div style="display: flex;">
+    <div style="display: flex;" *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
         <span class="label">Finishing: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.finishing" />
@@ -156,17 +160,20 @@
       </div>
     </div>
     
-    <button pButton class="save"  style="width: 100px;margin-left: 450px;" (click)="updatePlayer()" type="button">Guardar</button>
+    <button pButton class="save"  style="width: 100px;margin-left: 450px;" [disabled]="!validateFields(playerToEdit)" (click)="updatePlayer()" type="button">Guardar</button>
   </div> 
 </p-dialog>
 
-<p-dialog [(visible)]="viewMenu && addPlayerDisplay" [draggable]="false" [resizable]="false" *ngIf="playerToAdd">
+<p-dialog [(visible)]="viewMenu && addPlayerDisplay"  [draggable]="false" [resizable]="false" *ngIf="playerToAdd">
   <div class="player-card-dialog">
-    <div class="player-header">
-    <h1 style="min-width: 120px;font-size: 2rem!important;">
-      <input placeholder="Name" type="text" pInputText [(ngModel)]="playerToAdd.name" /></h1> 
+    <div class="player-header" style="width: 100%;">
+      <div style="display: flex;margin-left: 0px;min-width: 480px;">
+        <h1 style="min-width: 120px;font-size: 2rem!important;">
+          <input placeholder="Name" type="text" pInputText [(ngModel)]="playerToAdd.name" /></h1> 
+      </div>
+      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" pInputText [(ngModel)]="playerToAdd.overallSmp" *ngIf="smpMode && addPlayerDisplay" />
     </div>
-    <div style="display: flex;">
+    <div style="display: flex;" *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
         <span class="label">Finishing: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.finishing" />
@@ -212,13 +219,16 @@
   </div> 
 </p-dialog>
 
-<p-dialog [(visible)]="viewMenu && duplicatePlayerDisplay" [draggable]="false" [resizable]="false" *ngIf="playerToDuplicate">
+<p-dialog [(visible)]="viewMenu && duplicatePlayerDisplay"  [draggable]="false" [resizable]="false" *ngIf="playerToDuplicate">
   <div class="player-card-dialog">
-    <div class="player-header">
-      <h1 style="min-width: 120px;font-size: 2rem!important;">
-        <input placeholder="Name" type="text" pInputText [(ngModel)]="playerToDuplicate.name" /></h1> 
+    <div class="player-header" style="width: 100%;">
+      <div style="display: flex;margin-left: 0px;min-width: 480px;">
+        <h1 style="min-width: 120px;font-size: 2rem!important;">
+          <input placeholder="Name" type="text" pInputText [(ngModel)]="playerToDuplicate.name" /></h1> 
+      </div>
+      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" pInputText [(ngModel)]="playerToDuplicate.overallSmp" *ngIf="smpMode && duplicatePlayerDisplay" />
     </div>
-    <div style="display: flex;">
+    <div style="display: flex;"  *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
         <span class="label">Finishing: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.finishing" />

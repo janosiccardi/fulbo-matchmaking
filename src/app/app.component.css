@@ -186,6 +186,18 @@
   height: 31px;
   background-color: greenyellow;
 }
+
+.switch-mode{
+  height: 27px!important;
+  margin-left: 8px!important;
+
+}
+
+:host ::ng-deep .p-inputswitch .p-inputswitch-slider::before {
+  background: black;
+} 
+
+
 .save:hover{
   background-color: black;
 }

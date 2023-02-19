@@ -22,6 +22,7 @@ export class  Player {
     composure: number;  
 
     overall: number;
+    overallSmp : number;
     
     cuenta: string;
 }
