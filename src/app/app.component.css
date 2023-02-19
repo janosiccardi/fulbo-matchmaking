@@ -223,7 +223,7 @@
     color: rgb(255, 255, 255);
     background-color: rgb(63, 63, 63);
     border: 1px solid black;
-    margin-top: 30px;
+    margin-top: 15px;
     max-width: 498px!important;
 }
 :host ::ng-deep .p-dialog-header-icon{

@@ -40,6 +40,7 @@ export class AppComponent {
   public score2: number = 0;
   public confirmDeletePlayer: boolean;
   public smpMode: boolean;
+  public combinationQty: number;
 
   constructor(public generateService : GenerateService,
             public accountService : AccountService,
@@ -204,6 +205,7 @@ export class AppComponent {
         this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / 5;
         this.team1.sort((a, b) => this.compare(a.overall,b.overall));
         this.team2.sort((a, b) => this.compare(a.overall,b.overall));
+        this.combinationQty = data.combinationQty;
       }else{
         alert("Nigunga combinación posible!");
       }

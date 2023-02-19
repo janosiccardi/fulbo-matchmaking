@@ -88,9 +88,9 @@
         </ng-template>
     </p-listbox>
     </div>
-    <button pButton class="generateButton" [disabled]="selectedPlayers.length != 10" (click)="generateTeams()" type="button">Generar Equipos</button>
+    <button pButton class="generateButton" [disabled]="selectedPlayers.length!=10 && selectedPlayers.length != 8 && selectedPlayers.length != 12" (click)="generateTeams()" type="button">Generar Equipos</button>
     <div class="subcard" style="margin-top: 0px;" *ngIf="asingTeam">
-      <h1 style="margin-top: 20px;" *ngIf="team1.length != 0">Equipo 1: <span [ngStyle]="{'color':getMediaColor(score1),'padding-left':'280px'}">{{score1.toFixed(1)}}</span></h1>
+      <h1 style="margin-top: 20px;" *ngIf="team1.length != 0">Equipo 1: <span [ngStyle]="{'color':getMediaColor(score1),'padding-left':'270px'}">{{score1.toFixed(1)}}</span></h1>
       <p-listbox [options]="team1" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}">        
         <ng-template let-player pTemplate="item">
           <div class="country-item">               
@@ -98,7 +98,7 @@
           </div>
       </ng-template>
       </p-listbox>
-      <h1 style="margin-top: 20px;" *ngIf="team1.length != 0">Equipo 2: <span [ngStyle]="{'color':getMediaColor(score2),'padding-left':'280px'}">{{score2.toFixed(1)}}</span></h1>
+      <h1 style="margin-top: 20px;" *ngIf="team1.length != 0">Equipo 2: <span [ngStyle]="{'color':getMediaColor(score2),'padding-left':'270px'}">{{score2.toFixed(1)}}</span></h1>
       <p-listbox [options]="team2" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}">             
         <ng-template let-player pTemplate="item">
           <div class="country-item">               
@@ -106,6 +106,7 @@
           </div>
       </ng-template>
       </p-listbox>
+      <h1 style="margin-top: 10px; margin-left: 170px; font-size: 1.2rem !important;" *ngIf="combinationQty != null">{{'Combinaciones posibles: '+combinationQty}}</h1>
     </div>
   </div> 
 
