@@ -236,6 +236,10 @@
   font-size:0.8rem!important;
   height: 21%!important;
 }
+:host ::ng-deep .p-listbox-item.p-highlight{
+  background: #193242 !important;
+}
+
 :host ::ng-deep .p-dialog-content {
   background: none;
   padding:0px;  

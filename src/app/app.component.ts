@@ -206,8 +206,13 @@ export class AppComponent {
         this.team2 = data.team2;     
         this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / 5;
         this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / 5;
-        this.team1.sort((a, b) => this.compare(a.overall,b.overall));
-        this.team2.sort((a, b) => this.compare(a.overall,b.overall));
+        if(!this.smpMode){
+          this.team1.sort((a, b) => this.compare(a.overall,b.overall));
+          this.team2.sort((a, b) => this.compare(a.overall,b.overall));
+        }else{
+          this.team1.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
+          this.team2.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
+        }
         this.combinationQty = data.combinationQty;
       }else{
         alert("Nigunga combinación posible!");
@@ -287,6 +292,13 @@ export class AppComponent {
     this.accountService.save( this.accountModel).subscribe(data => {
       this.smpMode = data.smpMode;
     });
+    if(!this.smpMode){
+      this.team1.sort((a, b) => this.compare(a.overall,b.overall));
+      this.team2.sort((a, b) => this.compare(a.overall,b.overall));
+    }else{
+      this.team1.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
+      this.team2.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
+    }
   }
 
 }
