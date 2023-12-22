@@ -14,7 +14,7 @@ const httpOptions = {
     providedIn: "root"
   })
 export class GenerateService{ 
-    url: string = 'https://1146-2800-2130-7a40-73a-6857-bf5c-d128-1ca9.ngrok-free.app/generate';
+    url: string = 'https://charmed-presently-crab.ngrok-free.app/generate';
    
     constructor(private http: HttpClient) {}
     
