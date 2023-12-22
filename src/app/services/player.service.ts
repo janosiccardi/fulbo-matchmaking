@@ -13,7 +13,7 @@ const httpOptions = {
     providedIn: "root"
   })
 export class PlayerService{
-    url: string = 'http://localhost:8080/player';
+    url: string = 'https://41c8-2800-2130-7a40-73a-6857-bf5c-d128-1ca9.ngrok-free.app/player/getPlayers?id=8DzTyrSnu7bAPXMQqBK5jg==/player';
    
     constructor(private http: HttpClient) {}
 
