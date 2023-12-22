@@ -13,7 +13,7 @@ const httpOptions = {
     providedIn: "root"
   })
 export class PlayerService{
-    url: string = 'https://1146-2800-2130-7a40-73a-6857-bf5c-d128-1ca9.ngrok-free.app/player';
+    url: string = 'https://charmed-presently-crab.ngrok-free.app/player';
    
     constructor(private http: HttpClient) {}
 
