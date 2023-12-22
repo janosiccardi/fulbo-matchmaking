@@ -14,7 +14,7 @@ const httpOptions = {
     providedIn: "root"
   })
 export class AccountService{
-    url: string = 'https://1146-2800-2130-7a40-73a-6857-bf5c-d128-1ca9.ngrok-free.app/account';
+    url: string = 'https://charmed-presently-crab.ngrok-free.app/account';
    
     constructor(private http: HttpClient) {}
 
