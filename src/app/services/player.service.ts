@@ -20,7 +20,7 @@ export class PlayerService{
     constructor(private http: HttpClient) {}
 
     getPlayers(id: string): Observable<Array<Player>>{
-        return this.http.get<Array<Player>>(this.url + '/getPlayers?id=' + id);
+        return this.http.get<Array<Player>>(this.url + '/getPlayers?id=' + id, httpOptions);
     }
     deletePlayer(request: DeletePlayerRequest): Observable<boolean>{
       return this.http.post<boolean>(this.url + '/deletePlayer',request, httpOptions);
