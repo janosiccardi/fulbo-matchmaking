@@ -8,6 +8,8 @@ import { GenerateResponseModel } from "../models/generate-teams-response.model";
 const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
+    },{
+      'ngrok-skip-browser-warning':  'true'
     })
 };
 @Injectable({
