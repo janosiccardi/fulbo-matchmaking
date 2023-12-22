@@ -77,7 +77,7 @@
   <div class="card-asing-teams" *ngIf="asingTeam">
     <div class="subcard" *ngIf="asingTeam">
       
-      <h1 style="margin-top: 20px;">Seleccione 10 jugadores:</h1>
+      <h1 style="margin-top: 20px;">Seleccione los jugadores:</h1>
       <p-listbox [options]="optionsPlayers" [(ngModel)]="selectedPlayers" [metaKeySelection]="false" [checkbox]="true"
        [filter]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'500px'}" [style]="{'width':'100%'}"
        emptyFilterMessage="Escribí bien mogólico">
@@ -88,7 +88,7 @@
         </ng-template>
     </p-listbox>
     </div>
-    <button pButton class="generateButton" [disabled]="selectedPlayers.length!=10 && selectedPlayers.length != 8 && selectedPlayers.length != 12" (click)="generateTeams()" type="button">Generar Equipos</button>
+    <button pButton class="generateButton" [disabled]="selectedPlayers.length!=16 && selectedPlayers.length!=14 && selectedPlayers.length!=12 && selectedPlayers.length!=10 && selectedPlayers.length != 8 && selectedPlayers.length != 12" (click)="generateTeams()" type="button">Generar Equipos</button>
     <div class="subcard" style="margin-top: 0px;" *ngIf="asingTeam">
       <h1 style="margin-top: 20px;" *ngIf="team1.length != 0">Equipo 1: <span [ngStyle]="{'color':getMediaColor(score1),'padding-left':'270px'}">{{score1.toFixed(1)}}</span></h1>
       <p-listbox [options]="team1" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}">        
