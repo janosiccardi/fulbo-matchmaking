@@ -8,6 +8,8 @@ import { SaveModeRequest } from "../models/save-mode-request";
 const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
+    },{
+      'ngrok-skip-browser-warning':  'true'
     })
 };
 @Injectable({
