@@ -284,7 +284,7 @@ export class AppComponent {
   public getOverall(player: Player): number {
     return (((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 9 + 
       player.speed * 5 + player.strength * 6 + player.stamina * 8 + player.aggression * 1 + player.composure * 5 + 
-      player.positioning * 7 + player.vision * 7 + player.technique * 9) / 12) / 10) + 29;
+      player.positioning * 9 + player.vision * 7 + player.technique * 7) / 12) / 10) + 29;
   }
  
   saveMode(){
