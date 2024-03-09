@@ -274,12 +274,12 @@ export class AppComponent {
     });
   }
 
-  public getMediaColorText(s: string){
+  public getMediaColorText(s: string){    
     let stat : number = +s;
-    return stat < 60? "#white" : stat < 70 ? "#008000" : stat < 80 ? "#FFFF00" : stat < 90 ? "#FF8000" : "#FF0000";
+    return stat < 75? "#white" : stat < 80 ? "#008000" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
   }
   public getMediaColor(stat: number){
-    return stat < 60? "#white" : stat < 70 ? "#008000" : stat < 80 ? "#FFFF00" : stat < 90 ? "#FF8000" : "#FF0000";
+    return stat < 75? "#white" : stat < 80 ? "#008000" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
   }
   public getOverall(player: Player): number {
     return (((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 9 + 
