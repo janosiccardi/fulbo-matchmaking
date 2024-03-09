@@ -26,31 +26,31 @@
         </div>
         <div style="display: flex;" *ngIf="!smpMode">
           <div style="width:37%;display: block !important;">
-            <span class="label">Finishing: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.finishing)}">{{player.finishing}}</span>
+            <span class="label">Definición: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.finishing)}">{{player.finishing}}</span>
             <br>
-            <span class="label">Dribbling: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.dribbling)}">{{player.dribbling}}</span>
+            <span class="label">Regate: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.dribbling)}">{{player.dribbling}}</span>
             <br>            
-            <span class="label">Defending: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.defending)}">{{player.defending}}</span>
+            <span class="label">Defensa: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.defending)}">{{player.defending}}</span>
             <br>
-            <span class="label">Positioning: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.positioning)}">{{player.positioning}}</span>
+            <span class="label">Posición: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.positioning)}">{{player.positioning}}</span>
           </div>
           <div style="width:37%;">
-            <span class="label">Passing: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.passing)}">{{player.passing}}</span>
+            <span class="label">Pase: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.passing)}">{{player.passing}}</span>
             <br>
-            <span class="label">Speed: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.speed)}">{{player.speed}}</span>
+            <span class="label">Velocidad: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.speed)}">{{player.speed}}</span>
             <br>
-            <span class="label">Aggression: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.aggression)}">{{player.aggression}}</span>
+            <span class="label">Agresividad: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.aggression)}">{{player.aggression}}</span>
             <br>
-            <span class="label">Vision: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.vision)}">{{player.vision}}</span>
+            <span class="label">Visión: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.vision)}">{{player.vision}}</span>
           </div>
           <div style="width:30%;">            
-            <span class="label">Technique: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.technique)}">{{player.technique}}</span>
+            <span class="label">Tecnica: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.technique)}">{{player.technique}}</span>
             <br>
-            <span class="label">Strength: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.strength)}">{{player.strength}}</span>
+            <span class="label">Fuerza: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.strength)}">{{player.strength}}</span>
             <br>
-            <span class="label">Stamina: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.stamina)}">{{player.stamina}}</span>            
+            <span class="label">Resistencia: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.stamina)}">{{player.stamina}}</span>            
             <br>
-            <span class="label">Composure: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.composure)}">{{player.composure}}</span>
+            <span class="label">Actitud: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.composure)}">{{player.composure}}</span>
           </div>
         </div>
       </div> 
@@ -121,42 +121,42 @@
     </div>
     <div style="display: flex;" *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
-        <span class="label">Finishing: </span>
+        <span class="label">Definición:</span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.finishing" />
         <br>
-        <span class="label">Dribbling: </span>
+        <span class="label">Regate: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.dribbling" />
         <br>            
-        <span class="label">Defending: </span>
+        <span class="label">Defensa: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.defending" />
         <br>
-        <span class="label">Positioning: </span>
+        <span class="label">Posición: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.positioning" />
       </div>
       <div style="width:37%;">
-        <span class="label">Passing: </span>
+        <span class="label">Pase: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.passing" />
         <br>
-        <span class="label">Speed: </span>
+        <span class="label">Velocidad: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.speed" />
         <br>
-        <span class="label">Aggression: </span>
+        <span class="label">Agresividad: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.aggression" />
         <br>
-        <span class="label">Vision: </span>
+        <span class="label">Visión: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.vision" />
       </div>
       <div style="width:30%;">            
-        <span class="label">Technique: </span>
+        <span class="label">Tecnica: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.technique" />
         <br>
-        <span class="label">Strength: </span>
+        <span class="label">Fuerza: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.strength" />
         <br>
-        <span class="label">Stamina: </span>
+        <span class="label">Resistencia: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.stamina" />           
         <br>
-        <span class="label">Composure: </span>
+        <span class="label">Actitud: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.composure" />
       </div>
     </div>
@@ -176,42 +176,42 @@
     </div>
     <div style="display: flex;" *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
-        <span class="label">Finishing: </span>
+        <span class="label">Definición:</span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.finishing" />
         <br>
-        <span class="label">Dribbling: </span>
+        <span class="label">Regate: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.dribbling" />
         <br>            
-        <span class="label">Defending: </span>
+        <span class="label">Defensa: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.defending" />
         <br>
-        <span class="label">Positioning: </span>
+        <span class="label">Posición: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.positioning" />
       </div>
       <div style="width:37%;">
-        <span class="label">Passing: </span>
+        <span class="label">Pase: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.passing" />
         <br>
-        <span class="label">Speed: </span>
+        <span class="label">Velocidad: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.speed" />
         <br>
-        <span class="label">Aggression: </span>
+        <span class="label">Agresividad: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.aggression" />
         <br>
-        <span class="label">Vision: </span>
+        <span class="label">Visión: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.vision" />
       </div>
       <div style="width:30%;">            
-        <span class="label">Technique: </span>
+        <span class="label">Tecnica: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.technique" />
         <br>
-        <span class="label">Strength: </span>
+        <span class="label">Fuerza: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.strength" />
         <br>
-        <span class="label">Stamina: </span>
+        <span class="label">Resistencia: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.stamina" />           
         <br>
-        <span class="label">Composure: </span>
+        <span class="label">Actitud: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.composure" />
       </div>
     </div>
@@ -231,42 +231,42 @@
     </div>
     <div style="display: flex;"  *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
-        <span class="label">Finishing: </span>
+        <span class="label">Definición:</span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.finishing" />
         <br>
-        <span class="label">Dribbling: </span>
+        <span class="label">Regate: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.dribbling" />
         <br>            
-        <span class="label">Defending: </span>
+        <span class="label">Defensa: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.defending" />
         <br>
-        <span class="label">Positioning: </span>
+        <span class="label">Posición: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.positioning" />
       </div>
       <div style="width:37%;">
-        <span class="label">Passing: </span>
+        <span class="label">Pase: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.passing" />
         <br>
-        <span class="label">Speed: </span>
+        <span class="label">Velocidad: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.speed" />
         <br>
-        <span class="label">Aggression: </span>
+        <span class="label">Agresividad: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.aggression" />
         <br>
-        <span class="label">Vision: </span>
+        <span class="label">Visión: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.vision" />
       </div>
       <div style="width:30%;">            
-        <span class="label">Technique: </span>
+        <span class="label">Tecnica: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.technique" />
         <br>
-        <span class="label">Strength: </span>
+        <span class="label">Fuerza: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.strength" />
         <br>
-        <span class="label">Stamina: </span>
+        <span class="label">Resistencia: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.stamina" />           
         <br>
-        <span class="label">Composure: </span>
+        <span class="label">Actitud: </span>
         <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.composure" />
       </div>
     </div>
