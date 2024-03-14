@@ -1,8 +1,9 @@
 
 export class  Account { 
-    id: string;
+    id: number;
     us: string;
     pass: string;
+    teams:number[];
     nickname: string;
     smpMode: boolean;
 }

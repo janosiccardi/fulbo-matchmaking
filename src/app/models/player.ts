@@ -24,5 +24,5 @@ export class  Player {
     overall: number;
     overallSmp : number;
     
-    cuenta: string;
+    team: number;
 }

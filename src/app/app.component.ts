@@ -22,7 +22,7 @@ export class AppComponent {
   public login = true;
   public user: string;  
   public password: string;
-  public account: string;
+  public account: number;
   public addPlayerDisplay = false;
   public editPlayerDisplay = false;
   public duplicatePlayerDisplay = false;
@@ -43,6 +43,7 @@ export class AppComponent {
   public confirmDeletePlayer: boolean;
   public smpMode: boolean;
   public combinationQty: number;
+  public selectedTeam: number;
   accountModel: Account;
 
   constructor(public generateService : GenerateService,
@@ -50,10 +51,11 @@ export class AppComponent {
             public playerService: PlayerService) { 
   }
   ngOnInit(){
+    this.selectedTeam = 1;
   }
 
   public getPlayers(){    
-    this.playerService.getPlayers(this.account).subscribe(data =>{
+    this.playerService.getPlayers(this.selectedTeam).subscribe(data =>{
       this.players = data;
       this.players.sort((a, b) => a.name.localeCompare(b.name));     
       this.players.push(new Player());
@@ -78,7 +80,7 @@ export class AppComponent {
   }
   
   public addPlayer(){
-    this.playerToAdd.cuenta = this.account;
+    this.playerToAdd.team = this.selectedTeam;
     if(this.validateFields(this.playerToAdd)){
       this.playerService.addPlayer(this.playerToAdd).subscribe(data =>{    
       }, error =>{
@@ -118,7 +120,7 @@ export class AppComponent {
   }
 
   public duplicatePlayer(){
-    this.playerToDuplicate.cuenta = this.account;
+    this.playerToDuplicate.team = this.selectedTeam;
     if(this.validateFields(this.playerToDuplicate)){
       this.playerService.addPlayer(this.playerToDuplicate).subscribe(data =>{    
       }, error =>{
@@ -165,7 +167,7 @@ export class AppComponent {
   }
 
   updatePlayer(){    
-    this.playerToEdit.cuenta = this.account;
+    this.playerToEdit.team = this.selectedTeam;
     if(this.validateFields(this.playerToEdit)){
       this.playerService.updatePlayer(this.playerToEdit).subscribe(data =>{      
         this.playerToEdit.overall = this.getOverall(this.playerToEdit);
@@ -232,7 +234,7 @@ export class AppComponent {
   public deletePlayer(){
     let request: DeletePlayerRequest = new DeletePlayerRequest();
     request.playerName = this.playerToDelete.name;
-    request.id = this.account;
+    request.team = this.selectedTeam;
     this.playerService.deletePlayer(request).subscribe(data =>{
       this.players.splice(this.indexToDelete,1);
     });
@@ -276,10 +278,10 @@ export class AppComponent {
 
   public getMediaColorText(s: string){    
     let stat : number = +s;
-    return stat < 75? "#white" : stat < 80 ? "#008000" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
+    return stat < 75? "#white" : stat < 80 ? "#00AA00" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
   }
   public getMediaColor(stat: number){
-    return stat < 75? "#white" : stat < 80 ? "#008000" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
+    return stat < 75? "#white" : stat < 80 ? "#00AA00" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
   }
   public getOverall(player: Player): number {
     return (((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 9 + 
