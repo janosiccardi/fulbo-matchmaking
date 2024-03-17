@@ -295,9 +295,9 @@ export class AppComponent {
     return stat < 75? "#white" : stat < 80 ? "#00AA00" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
   }
   public getOverall(player: Player): number {
-    return (((player.finishing * 10 + player.passing * 8 + player.dribbling * 10 + player.defending * 9 + 
-      player.speed * 5 + player.strength * 6 + player.stamina * 8 + player.aggression * 1 + player.composure * 5 + 
-      player.positioning * 9 + player.vision * 7 + player.technique * 7) / 12) / 10) + 29;
+    return (((player.finishing * 10 + player.passing * 8 + player.dribbling * 9 + player.defending * 9 + 
+      player.speed * 5 + player.strength * 6 + player.stamina * 6 + player.aggression * 1 + player.composure * 5 + 
+      player.positioning * 9 + player.vision * 7 + player.technique * 7) / 12) / 10) +  31.3;
   }
  
   saveMode(){
