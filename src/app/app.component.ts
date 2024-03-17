@@ -206,8 +206,8 @@ export class AppComponent {
       if(data != null){
         this.team1 = data.team1;    
         this.team2 = data.team2;     
-        this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / 5;
-        this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / 5;
+        this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / this.team1.length;
+        this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / this.team2.length;
         if(!this.smpMode){
           this.team1.sort((a, b) => this.compare(a.overall,b.overall));
           this.team2.sort((a, b) => this.compare(a.overall,b.overall));
