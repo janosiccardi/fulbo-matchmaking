@@ -4,6 +4,9 @@
   <span>Fulbo Matchmaking</span>
   
     <div class="spacer"></div>      
+    
+
+    <button pButton class="header-button" title="ID" (click)="showId()" type="button"  *ngIf="this.account"><i class="pi pi-info-circle"></i></button>
     <span *ngIf="!login">Modo simple:  </span>
     <p-inputSwitch  (onChange)="saveMode()" class="switch-mode" [disabled]="this.editPlayerDisplay" [(ngModel)]="smpMode"  *ngIf="!login"></p-inputSwitch>
     <button pButton class="header-button" title="Cerrar Sesion" (click)="refresh()" type="button" *ngIf="menu"><i class="pi pi-sign-out"></i></button>    
@@ -18,9 +21,9 @@
         
         <div style="display: flex;margin-left: 0px;min-width: 350px;">
           <h1 ><span> {{player.name + ' '}}</span></h1> 
-          <button pButton class="player-button" title="Eliminar" style="margin-left: 7px!important;" (click)="deletePlayerDialog(player,i)" type="button"><i class="pi pi-trash"></i></button>
-          <button pButton class="player-button" title="Editar" (click)="editPlayer(player)" type="button"><i class="pi pi-user-edit"></i></button>
-          <button pButton class="player-button" title="Duplicar" (click)="duplicate(player)" type="button"><i class="pi pi-users"></i></button>
+          <button *ngIf="adminTeam" pButton class="player-button" title="Eliminar" style="margin-left: 7px!important;" (click)="deletePlayerDialog(player,i)" type="button"><i class="pi pi-trash"></i></button>
+          <button *ngIf="adminTeam" pButton class="player-button" title="Editar" (click)="editPlayer(player)" type="button"><i class="pi pi-user-edit"></i></button>
+          <button *ngIf="adminTeam" pButton class="player-button" title="Duplicar" (click)="duplicate(player)" type="button"><i class="pi pi-users"></i></button>
         </div>
         <h1><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'5px'}">{{getOvl(player) == '100.0'? '99.9' : getOvl(player)}}</span></h1>
         </div>
@@ -56,7 +59,7 @@
       </div> 
       
       <div style="background: none;" *ngIf="!player.finishing && !player.composure">
-        <button pButton class="add-player-button" title="Agregar Jugador" (click)="newPlayer()" type="button"><i class="pi pi-user-plus"></i></button>
+        <button *ngIf="adminTeam" pButton class="add-player-button" title="Agregar Jugador" (click)="newPlayer()" type="button"><i class="pi pi-user-plus"></i></button>
       </div>
     </div>
   </div>

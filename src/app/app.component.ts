@@ -9,6 +9,7 @@ import { PlayerService } from './services/player.service';
 import * as CryptoJS from 'crypto-js';
 import { SaveModeRequest } from './models/save-mode-request';
 import { Account } from './models/account.model';
+import { Team } from './models/team.model';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +43,7 @@ export class AppComponent {
   public score2: number = 0;
   public confirmDeletePlayer: boolean;
   public smpMode: boolean;
+  public adminTeam = false;
   public combinationQty: number;
   public selectedTeam: number;
   accountModel: Account;
@@ -51,7 +53,18 @@ export class AppComponent {
             public playerService: PlayerService) { 
   }
   ngOnInit(){
-    this.selectedTeam = 1;
+  }
+
+  showId(){
+    alert("Usuario: "+this.accountModel.nickname +"\nID: "+this.account);
+  }
+
+  public selectTeam(team: Team){
+    this.selectedTeam = team.id;
+    this.adminTeam = team.admins.includes(this.account);
+    this.getPlayers();  
+    this.menu=true;
+    this.login= false;
   }
 
   public getPlayers(){    
@@ -267,10 +280,8 @@ export class AppComponent {
     request.us = this.user;
     request.pass = CryptoJS.AES.encrypt(this.password.trim(), 'fmm2023').toString();
     this.accountService.getAccount(request).subscribe(data => {
-      this.account = data.id;
-      this.getPlayers();        
-      this.menu=true;
-      this.login= false;
+      this.account = data.id;    
+      this.selectTeam(data.teams[0]);  
       this.accountModel = data;
       this.smpMode = data.smpMode;
     });
