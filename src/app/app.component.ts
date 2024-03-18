@@ -47,6 +47,7 @@ export class AppComponent {
   public combinationQty: number;
   public selectedTeam: number;
   accountModel: Account;
+  public overall!: Player;
 
   constructor(public generateService : GenerateService,
             public accountService : AccountService,
@@ -71,12 +72,17 @@ export class AppComponent {
     this.playerService.getPlayers(this.selectedTeam).subscribe(data =>{
       this.players = data;
       this.players.sort((a, b) => a.name.localeCompare(b.name));     
-      this.players.push(new Player());
+      this.players.push(new Player());      
+      this.players.forEach((value) => {
+        if(value.name == "Overall" && value.team == 1){
+         this.overall = value;
+        }
+      });
     });
   }
 
   public getOvl(player :Player){
-    if(this.smpMode){
+    if(this.smpMode || player.name == "Overall"){
       if(player.overallSmp == null || (player.overallSmp + '') == ''){
          return '0.0';
       }else{
@@ -185,6 +191,7 @@ export class AppComponent {
       this.playerService.updatePlayer(this.playerToEdit).subscribe(data =>{      
         this.playerToEdit.overall = this.getOverall(this.playerToEdit);
         this.playerToEdit = new Player();
+        this.getPlayers();
         this.editPlayerDisplay = false;
       },error =>{
         if (error.error.error == "Bad Request"){           
@@ -313,6 +320,14 @@ export class AppComponent {
       this.team2.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
     }
   }
+
+  isOverall(name: string): boolean{
+    if(name == "Overall"){
+        return this.selectedTeam == 1 && this.adminTeam;
+    }else{
+      return true;
+    }
+   }
 
 }
 
