@@ -22,6 +22,15 @@
     font-weight: 600;
   }
 
+  .link-button{
+    background: none !important;    
+    color: #3366BB;
+    text-decoration: underline;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
   .toolbar img {
     margin: 0 16px;
   }
@@ -137,7 +146,7 @@
   .menu-card-centered{
     width:12%; 
     margin-top: 280px;
-    margin-left: 795px;
+    margin-left: 785px;
     background-color: #3a3a3a;
     padding: 26px;
     padding-left: 73px;

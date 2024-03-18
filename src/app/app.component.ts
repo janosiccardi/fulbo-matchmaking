@@ -28,6 +28,8 @@ export class AppComponent {
   public editPlayerDisplay = false;
   public duplicatePlayerDisplay = false;
   public playerToEdit: Player;
+  public accountToSingUp : Account = new Account();
+  public singUp = false;
   public playerToAdd : Player;
   public playerToDelete: Player;
   public playerToDuplicate: Player;
@@ -58,6 +60,21 @@ export class AppComponent {
 
   showId(){
     alert("Usuario: "+this.accountModel.nickname +"\nID: "+this.account);
+  }
+
+  public actionSingUpMenu(){
+    this.singUp = !this.singUp;
+    this.accountToSingUp = new Account();
+  }
+
+  
+  public singUpAccount(){
+    this.accountToSingUp.pass = CryptoJS.AES.encrypt(this.accountToSingUp.pass.trim(), 'fmm2023').toString();
+    this.accountService.save(this.accountToSingUp).subscribe(data => {
+      if(data.id != null){
+        alert("Cuenta registrada!");
+      }
+    });
   }
 
   public selectTeam(team: Team){

@@ -71,12 +71,23 @@
   </div>   
 
   
-  <div class="menu-card-centered" *ngIf="login">
+  <div class="menu-card-centered" *ngIf="login && !singUp">
     <input type="text" style="width: 180px;margin-top: 10px;" pInputText placeholder="User" [(ngModel)]="user" />
     <input type="password" style="width: 180px;margin-top: 10px;" pInputText placeholder="Password" [(ngModel)]="password" />    
     <button pButton style="width: 180px;" (click)="loginAccount()" type="button">Login</button>
+    <button  class="link-button" style="width: 180px;" (click)="actionSingUpMenu()">Registrarse</button>
   </div>   
   
+
+  <div class="menu-card-centered" style="margin-top: 200px;" *ngIf="singUp">
+    <h1 style="margin-top:0px">Registrarse</h1>
+    <input type="text" style="width: 180px;margin-top: 10px;height:40px;" pInputText placeholder="User" [(ngModel)]="accountToSingUp.us" />
+    <input type="password" style="width: 180px;height:40px;margin-top: 10px;font-size: small;" pInputText placeholder=" Password" [(ngModel)]="accountToSingUp.pass" />
+    <input type="text" style="width: 180px;margin-top: 10px;height:40px;" pInputText placeholder="Nombre completo" [(ngModel)]="accountToSingUp.nickname" />
+    <button pButton style="width: 180px;" (click)="singUpAccount()" type="button">Registrar</button>    
+    <button class="link-button" style="width: 180px;" (click)="actionSingUpMenu()">Cancelar</button>
+  </div>
+
   <div class="card-asing-teams" *ngIf="asingTeam">
     <div class="subcard" *ngIf="asingTeam">
       
