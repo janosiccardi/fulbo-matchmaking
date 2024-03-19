@@ -285,7 +285,19 @@ export class AppComponent {
 
   refresh(): void {
     window.location.reload();
-}
+  }
+
+  createTeam(){
+    this.teamToAdd.admins = [this.account];
+    this.teamToAdd.associatedUsers = [this.account];
+    this.teamService.save(this.teamToAdd).subscribe(data =>{  
+      if(data){
+        this.teamToAdd = new Team();
+        this.teams.splice(this.teams.length -1, 0, data);
+        this.addTeamDisplay = false;
+      }
+    });
+  }
 
   public deleteDialog(player: Player, i: number){
     this.playerToDelete = player;

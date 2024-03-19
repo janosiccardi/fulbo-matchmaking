@@ -79,7 +79,7 @@
       </div> 
       
       <div style="background: none;" *ngIf="!team.name">
-        <button pButton [disabled]="true" class="add-player-button" title="Agregar Equipo" (click)="newTeam()" type="button"><i class="pi pi-user-plus"></i></button>
+        <button pButton class="add-player-button" title="Agregar Equipo" (click)="newTeam()" type="button"><i class="pi pi-user-plus"></i></button>
       </div>
     </div>
   </div>
@@ -252,6 +252,19 @@
     </div>
     
     <button pButton class="save"  style="width: 100px;margin-left: 450px;" (click)="addPlayer()" type="button">Agregar</button>
+  </div> 
+</p-dialog>
+
+<p-dialog [(visible)]="viewTeams && addTeamDisplay"  [draggable]="false" [resizable]="false" *ngIf="teamToAdd">
+  <div class="player-card-dialog">
+    <div class="player-header" style="width: 100%;">
+      <div style="display: flex;margin-left: 0px;min-width: 480px;">
+        <h1 style="min-width: 120px;font-size: 2rem!important;">
+          <input placeholder="Name" type="text" pInputText [(ngModel)]="teamToAdd.name" /></h1> 
+      </div>
+    </div>
+    
+    <button pButton class="save"  style="width: 100px;margin-left: 450px;" (click)="createTeam()" type="button">Crear</button>
   </div> 
 </p-dialog>
 
