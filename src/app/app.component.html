@@ -9,8 +9,8 @@
     <button pButton class="header-button" title="ID" (click)="showId()" type="button"  *ngIf="this.account"><i class="pi pi-info-circle"></i></button>
     <span *ngIf="!login">Modo simple:  </span>
     <p-inputSwitch  (onChange)="saveMode()" class="switch-mode" [disabled]="this.editPlayerDisplay" [(ngModel)]="smpMode"  *ngIf="!login"></p-inputSwitch>
-    <button pButton class="header-button" title="Cerrar Sesion" (click)="refresh()" type="button" *ngIf="menu"><i class="pi pi-sign-out"></i></button>    
-    <button pButton class="header-button" title="Volver" (click)="back()" type="button" *ngIf="!menu && !login"><i class="pi pi-arrow-left"></i></button>
+    <button pButton class="header-button" title="Cerrar Sesion" (click)="refresh()" type="button" *ngIf="viewTeams"><i class="pi pi-sign-out"></i></button>    
+    <button pButton class="header-button" title="Volver" (click)="back()" type="button" *ngIf="!viewTeams && !login"><i class="pi pi-arrow-left"></i></button>
 </div>
 
 <div class="content" role="main">
@@ -21,7 +21,7 @@
         
         <div style="display: flex;margin-left: 0px;min-width: 350px;">
           <h1 ><span> {{player.name + ' '}}</span></h1> 
-          <button *ngIf="adminTeam && player.name != 'Overall'" pButton class="player-button" title="Eliminar" style="margin-left: 7px!important;" (click)="deletePlayerDialog(player,i)" type="button"><i class="pi pi-trash"></i></button>
+          <button *ngIf="adminTeam && player.name != 'Overall'" pButton class="player-button" title="Eliminar" style="margin-left: 7px!important;" (click)="deleteDialog(player,i)" type="button"><i class="pi pi-trash"></i></button>
           <button *ngIf="adminTeam" pButton class="player-button" title="Editar" (click)="editPlayer(player)" type="button"><i class="pi pi-user-edit"></i></button>
           <button *ngIf="adminTeam && player.name != 'Overall'" pButton class="player-button" title="Duplicar" (click)="duplicate(player)" type="button"><i class="pi pi-users"></i></button>
         </div>
@@ -60,6 +60,26 @@
       
       <div style="background: none;" *ngIf="!player.finishing && !player.composure">
         <button *ngIf="adminTeam" pButton class="add-player-button" title="Agregar Jugador" (click)="newPlayer()" type="button"><i class="pi pi-user-plus"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="viewTeams" class="players"> 
+    <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let team of teams; let i = index" [attr.data-index]="i">
+      <div class="player-card" *ngIf="team.name">
+        <div class="player-header">
+        
+          <div style="display: flex;margin-left: 0px;min-width: 270px;">
+            <h1 ><span> {{team.name + ' '}}</span></h1> 
+            <button pButton class="player-button" title="Eliminar" style="margin-left: 7px!important;" (click)="deleteTeamDialog(team,i)" type="button"><i class="pi pi-trash"></i></button>
+            <button pButton [disabled]="true" class="player-button" title="Editar" (click)="editTeam(team)" type="button"><i class="pi pi-user-edit"></i></button>
+          </div>
+          <button pButton title="Editar" (click)="selectionTeam(team)" type="button">Seleccionar</button>
+        </div>        
+      </div> 
+      
+      <div style="background: none;" *ngIf="!team.name">
+        <button pButton [disabled]="true" class="add-player-button" title="Agregar Equipo" (click)="newTeam()" type="button"><i class="pi pi-user-plus"></i></button>
       </div>
     </div>
   </div>
@@ -292,12 +312,23 @@
 
 <p-dialog [(visible)]="confirmDeletePlayer" *ngIf="playerToDelete" [closable]="false" [draggable]="false" [resizable]="false">
   <div class="player-card-dialog">
-    <h1 style="font-size: 1.1rem!important;margin-top: 10px;"><span>{{'Esta seguro que desea eliminar el jugador "'+ playerToDelete.name+'" ?'}}</span></h1>
+    <h1 style="font-size: 1.1rem!important;margin-top: 10px;"><span>{{'Esta seguro que desea eliminar el jugador "'+playerToDelete.name+'" ?'}}</span></h1>
     <div style="display: flex;margin-top: 25px;">
       <button pButton class="save" style="margin-left: 380px;"(click)="deletePlayer()" type="button">Si</button>
       <button pButton class="no"  (click)="closeDeleteDialog()" type="button">No</button>
     </div>
   </div>
 </p-dialog>
+
+<p-dialog [(visible)]="confirmDeleteTeam" *ngIf="teamToDelete" [closable]="false" [draggable]="false" [resizable]="false">
+  <div class="player-card-dialog">
+    <h1 style="font-size: 1.1rem!important;margin-top: 10px;"><span>{{'Esta seguro que desea eliminar el equipo "'+teamToDelete.name+'" ?'}}</span></h1>
+    <div style="display: flex;margin-top: 25px;">
+      <button pButton class="save" style="margin-left: 380px;"(click)="deleteTeam()" type="button">Si</button>
+      <button pButton class="no"  (click)="closeDeleteTeamDialog()" type="button">No</button>
+    </div>
+  </div>
+</p-dialog>
+
 <router-outlet></router-outlet>
 

@@ -16,7 +16,7 @@ const httpOptions = {
 @Injectable({
     providedIn: "root"
   })
-export class AccountService{
+export class TeamService{
     url: string = 'https://charmed-presently-crab.ngrok-free.app/team';
    
     constructor(private http: HttpClient) {}

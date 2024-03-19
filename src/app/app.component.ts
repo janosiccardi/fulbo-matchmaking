@@ -10,6 +10,7 @@ import * as CryptoJS from 'crypto-js';
 import { SaveModeRequest } from './models/save-mode-request';
 import { Account } from './models/account.model';
 import { Team } from './models/team.model';
+import { TeamService } from './services/team.service';
 
 @Component({
   selector: 'app-root',
@@ -25,16 +26,23 @@ export class AppComponent {
   public password: string;
   public account: number;
   public addPlayerDisplay = false;
+  public addTeamDisplay = false;
   public editPlayerDisplay = false;
+  public editTeamDisplay = false;
   public duplicatePlayerDisplay = false;
   public playerToEdit: Player;
   public accountToSingUp : Account = new Account();
   public singUp = false;
   public playerToAdd : Player;
+  public teamToAdd : Team;
   public playerToDelete: Player;
+  public teamToDelete: Team;
+  public teamToEdit: Team;
   public playerToDuplicate: Player;
   public indexToDelete: number;
+  public indexToDeleteTeam: number;
   public viewMenu = false;  
+  public viewTeams = false;  
   public asingTeam = false;
   public selectedPlayers: Array<Player> = [];
   public optionsPlayers: Array<Player> = [];
@@ -44,6 +52,8 @@ export class AppComponent {
   public score1: number = 0;  
   public score2: number = 0;
   public confirmDeletePlayer: boolean;
+  public confirmDeleteTeam: boolean;
+  public teams : Array<Team> = [];
   public smpMode: boolean;
   public adminTeam = false;
   public combinationQty: number;
@@ -53,6 +63,7 @@ export class AppComponent {
 
   constructor(public generateService : GenerateService,
             public accountService : AccountService,
+            public teamService: TeamService,
             public playerService: PlayerService) { 
   }
   ngOnInit(){
@@ -113,6 +124,11 @@ export class AppComponent {
   newPlayer(){
     this.playerToAdd = new Player();
     this.addPlayerDisplay = true;
+  }
+
+  newTeam(){
+    this.teamToAdd = new Team();
+    this.addTeamDisplay = true;
   }
   
   public addPlayer(){
@@ -182,6 +198,11 @@ export class AppComponent {
     this.editPlayerDisplay = true;
   }
 
+    
+  editTeam(team: Team){
+    this.teamToEdit = team;
+    this.editTeamDisplay = true;
+  }
   
   validateFields(player: Player) {
     if(!this.smpMode){
@@ -263,10 +284,22 @@ export class AppComponent {
     window.location.reload();
 }
 
-  public deletePlayerDialog(player: Player, i: number){
-    this.confirmDeletePlayer = true;
+  public deleteDialog(player: Player, i: number){
     this.playerToDelete = player;
+    this.confirmDeletePlayer = true;
     this.indexToDelete = i;
+  }
+
+  public deleteTeamDialog(team: Team, i: number){
+    this.teamToDelete = team;
+    this.confirmDeleteTeam = true;
+    this.indexToDeleteTeam = i;
+  }
+  public deleteTeam(){
+    this.teamService.delete(this.teamToDelete.id).subscribe(data =>{
+      this.teams.splice(this.indexToDeleteTeam,1);
+    });
+    this.confirmDeleteTeam = false;
   }
   public deletePlayer(){
     let request: DeletePlayerRequest = new DeletePlayerRequest();
@@ -283,6 +316,12 @@ export class AppComponent {
     this.indexToDelete = -1;
   }
 
+  public closeDeleteTeamDialog(){
+    this.confirmDeleteTeam = false;
+    this.teamToDelete = new Team();
+    this.indexToDeleteTeam = -1;
+  }
+
   public compare(a:number, b:number) {
     if (a < b) {
       return 1;
@@ -292,12 +331,16 @@ export class AppComponent {
     }
     return 0;
   }
-
+  selectionTeam(team: Team){    
+    this.selectTeam(team);  
+    this.viewTeams = false;
+  }
   public back(){
-    this.menu=true;
     this.viewMenu= false;
     this.asingTeam=false;
     this.login=false;
+    this.menu=false;
+    this.viewTeams = true;
   }
   public loginAccount(){
     let request: AccountRequest = new AccountRequest();
@@ -305,9 +348,12 @@ export class AppComponent {
     request.pass = CryptoJS.AES.encrypt(this.password.trim(), 'fmm2023').toString();
     this.accountService.getAccount(request).subscribe(data => {
       this.account = data.id;    
-      this.selectTeam(data.teams[0]);  
+      this.teams = data.teams;
+      this.teams.push(new Team());
       this.accountModel = data;
       this.smpMode = data.smpMode;
+      this.viewTeams = true;
+      this.login=false;
     });
   }
 
