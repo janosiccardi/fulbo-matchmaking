@@ -104,6 +104,9 @@ export class AppComponent {
       this.players.forEach((value) => {
         if(value.name == "Overall" && value.team == 1){
          this.overall = value;
+         const index = this.players.indexOf(value);
+         this.players.splice(index);
+         this.players.unshift(value);
         }
       });
     });
