@@ -30,9 +30,9 @@ export class TeamService{
     }
 
     
-    addUser(user: number, team: number): Observable<any>{
-      return this.http.post(this.url + '/addUser?user='+user+'&team='+team, httpOptions);
-    }    
+    addUser(user: number, userName:string,team: number): Observable<any>{
+      return this.http.post(this.url + '/addUser?user='+user+'&team='+team+'&name='+userName, httpOptions);
+    }      
 
    deleteUser(user: number, team: number): Observable<any>{
      return this.http.post(this.url + '/deleteUser?user='+user+'&team='+team, httpOptions);

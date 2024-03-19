@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AccountRequest } from './models/account-request';
 import { DeletePlayerRequest } from './models/delete-player-request.model';
 import { GenerateRequestModel } from './models/generate-teams-request.model';
@@ -11,6 +11,7 @@ import { SaveModeRequest } from './models/save-mode-request';
 import { Account } from './models/account.model';
 import { Team } from './models/team.model';
 import { TeamService } from './services/team.service';
+import { Scroller } from 'primeng/scroller';
 
 @Component({
   selector: 'app-root',
@@ -59,15 +60,26 @@ export class AppComponent {
   public combinationQty: number;
   public selectedTeam: number;
   accountModel: Account;
-  public overall!: Player;
+  public selectedUsers: Array<number> = [];
+  public userNameToAdd : string;
+  public userToAdd : number;
+  public addUserToTeam: boolean;
+  public overall: Player;
+  @ViewChild('sc') sc!: Scroller;
+
 
   constructor(public generateService : GenerateService,
             public accountService : AccountService,
             public teamService: TeamService,
             public playerService: PlayerService) { 
   }
+
   ngOnInit(){
   }
+
+  reset() {
+    this.sc.scrollToIndex(0, 'smooth');
+} 
 
   showId(){
     alert("Usuario: "+this.accountModel.nickname +"\nID: "+this.account);
@@ -371,7 +383,7 @@ export class AppComponent {
       this.login=false;
     });
   }
-
+ 
   public getMediaColorText(s: string){    
     let stat : number = +s;
     return stat < 75? "#white" : stat < 80 ? "#00AA00" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
@@ -406,6 +418,57 @@ export class AppComponent {
       return true;
     }
    }
+    
+   public closeAddUser(){
+    this.userNameToAdd = '';
+    this.userToAdd = Number.NaN;
+    this.addUserToTeam = false;
+  }
 
+  updateTeam(){
+    const index = this.teams.indexOf(this.teamToEdit);
+    this.teamService.save(this.teamToEdit).subscribe(data => { 
+      this.teams.splice(index, 1, data);
+      this.editTeamDisplay = false;
+    });
+  }
+
+  makeAdmin(user: number){
+    if(!this.teamToEdit.admins.includes(user)){
+      this.teamToEdit.admins.push(user);
+    }
+  }
+
+  deleteUserOfTeam(user:Account, team: number){
+    if(this.teamToEdit.admins.length == 1 && this.teamToEdit.admins.includes(user.id)){
+      alert("Debe haber un administrador del grupo!");
+    }else{
+      const index = this.teamToEdit.associatedUsers.indexOf(user.id);
+      const indexUSER = this.teamToEdit.users.indexOf(user);
+      this.teamService.deleteUser(user.id,team).subscribe(data =>{
+        this.teamToEdit.associatedUsers.splice(index,1);
+        this.teamToEdit.users.splice(indexUSER,1);
+        if(this.teamToEdit.admins.includes(user.id)){
+          const index2 = this.teamToEdit.admins.indexOf(user.id);
+          this.teamToEdit.admins.splice(index2,1);
+        }
+      });
+    }
+  }
+  addUserTeam(){
+    if(this.teamToEdit.associatedUsers.includes(this.userToAdd)){
+      alert("Ya existe el usuario en el grupo grupo!");
+    }else{
+      this.teamService.addUser(this.userToAdd,this.userNameToAdd,this.teamToEdit.id).subscribe(data =>{
+        this.teamToEdit.associatedUsers.push(this.userToAdd);        
+        this.teamToEdit.users.push(data);
+        this.closeAddUser();
+      }, error =>{
+        if(error){                 
+          alert("El usuario no existe o el nombre es incorrecto!");
+        }
+      });
+    }
+  }
 }
 

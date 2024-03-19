@@ -99,6 +99,14 @@
   hr {
     margin: 1.5rem 0;
   }
+
+  .subcard-team{
+    height: 75%;
+    background-color: rgb(48, 47, 47);
+    padding: 10px 25px;  
+    box-sizing: unset!important;
+  }
+  
   input[type="text"] {
     box-sizing: border-box;
     width: 100%;
