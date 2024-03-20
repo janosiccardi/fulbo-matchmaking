@@ -429,13 +429,20 @@ export class AppComponent {
     const index = this.teams.indexOf(this.teamToEdit);
     this.teamService.save(this.teamToEdit).subscribe(data => { 
       this.teams.splice(index, 1, data);
-      this.editTeamDisplay = false;
+      this.closeEditTeam();
+      this.editTeam(this.teams[index]);
     });
+  }
+  
+  closeEditTeam(){
+    this.editTeamDisplay = false;
+    this.teamToEdit = new Team();
   }
 
   makeAdmin(user: number){
     if(!this.teamToEdit.admins.includes(user)){
       this.teamToEdit.admins.push(user);
+      this.updateTeam();
     }
   }
 
@@ -457,11 +464,22 @@ export class AppComponent {
   }
   addUserTeam(){
     if(this.teamToEdit.associatedUsers.includes(this.userToAdd)){
-      alert("Ya existe el usuario en el grupo grupo!");
+      let sameUser = true;
+      this.teamToEdit.users.forEach((user) => {
+        if(user.id == this.userToAdd){
+          sameUser = user.nickname == this.userNameToAdd;
+        }
+      });
+      if(sameUser){
+        alert("Ya existe el usuario en el grupo grupo!");
+      }else{
+        alert("El usuario no existe o el nombre es incorrecto!");
+      }
     }else{
       this.teamService.addUser(this.userToAdd,this.userNameToAdd,this.teamToEdit.id).subscribe(data =>{
         this.teamToEdit.associatedUsers.push(this.userToAdd);        
         this.teamToEdit.users.push(data);
+        this.updateTeam();
         this.closeAddUser();
       }, error =>{
         if(error){                 
