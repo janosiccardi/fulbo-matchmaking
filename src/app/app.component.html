@@ -51,7 +51,7 @@
             <br>
             <span class="label">Fuerza: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.strength)}">{{player.strength}}</span>
             <br>
-            <span class="label">Resistencia: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.stamina)}">{{player.stamina}}</span>            
+            <span class="label">Energia: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.stamina)}">{{player.stamina}}</span>            
             <br>
             <span class="label">Actitud: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.composure)}">{{player.composure}}</span>
           </div>
@@ -92,7 +92,7 @@
 
   
   <div class="menu-card-centered" *ngIf="login && !singUp">
-    <input type="text" style="width: 180px;margin-top: 10px;" pInputText placeholder="User" [(ngModel)]="user" />
+    <input type="text" maxlength="16" style="width: 180px;margin-top: 10px;" pInputText placeholder="User" [(ngModel)]="user" />
     <input type="password" style="width: 180px;margin-top: 10px;" pInputText placeholder="Password" [(ngModel)]="password" />    
     <button pButton style="width: 180px;" (click)="loginAccount()" type="button">Login</button>
     <button  class="link-button" style="width: 180px;" (click)="actionSingUpMenu()">Registrarse</button>
@@ -101,9 +101,9 @@
 
   <div class="menu-card-centered" style="margin-top: 200px;" *ngIf="singUp">
     <h1 style="margin-top:0px">Registrarse</h1>
-    <input type="text" style="width: 180px;margin-top: 10px;height:40px;" pInputText placeholder="User" [(ngModel)]="accountToSingUp.us" />
+    <input type="text" maxlength="16" style="width: 180px;margin-top: 10px;height:40px;" pInputText placeholder="User" [(ngModel)]="accountToSingUp.us" />
     <input type="password" style="width: 180px;height:40px;margin-top: 10px;font-size: small;" pInputText placeholder=" Password" [(ngModel)]="accountToSingUp.pass" />
-    <input type="text" style="width: 180px;margin-top: 10px;height:40px;" pInputText placeholder="Nombre completo" [(ngModel)]="accountToSingUp.nickname" />
+    <input type="text" maxlength="16" style="width: 180px;margin-top: 10px;height:40px;" pInputText placeholder="Nombre completo" [(ngModel)]="accountToSingUp.nickname" />
     <button pButton style="width: 180px;" (click)="singUpAccount()" type="button">Registrar</button>    
     <button class="link-button" style="width: 180px;" (click)="actionSingUpMenu()">Cancelar</button>
   </div>
@@ -151,48 +151,48 @@
       <div style="display: flex;margin-left: 0px;min-width: 480px;">
         <h1 style="min-width: 50px!important;font-size: 2rem!important;"><span> {{playerToEdit.name + ' '}}</span></h1> 
       </div>
-      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" pInputText [(ngModel)]="playerToEdit.overallSmp" 
+      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" maxlength="16" pInputText [(ngModel)]="playerToEdit.overallSmp" 
       *ngIf="(smpMode || playerToEdit.name == '#Overall') && editPlayerDisplay" />
     </div>
     <div style="display: flex;" *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
         <span class="label">Definición:</span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.finishing" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.finishing" />
         <br>
         <span class="label">Regate: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.dribbling" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.dribbling" />
         <br>            
         <span class="label">Defensa: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.defending" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.defending" />
         <br>
         <span class="label">Posición: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.positioning" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.positioning" />
       </div>
       <div style="width:37%;">
         <span class="label">Pase: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.passing" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.passing" />
         <br>
         <span class="label">Velocidad: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.speed" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.speed" />
         <br>
         <span class="label">Agresividad: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.aggression" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.aggression" />
         <br>
         <span class="label">Visión: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.vision" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.vision" />
       </div>
       <div style="width:30%;">            
         <span class="label">Tecnica: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.technique" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.technique" />
         <br>
         <span class="label">Fuerza: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.strength" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.strength" />
         <br>
-        <span class="label">Resistencia: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.stamina" />           
+        <span class="label">Energia: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.stamina" />           
         <br>
         <span class="label">Actitud: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.composure" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.composure" />
       </div>
     </div>
     
@@ -205,49 +205,49 @@
     <div class="player-header" style="width: 100%;">
       <div style="display: flex;margin-left: 0px;min-width: 480px;">
         <h1 style="min-width: 120px;font-size: 2rem!important;">
-          <input placeholder="Name" type="text" pInputText [(ngModel)]="playerToAdd.name" /></h1> 
+          <input placeholder="Name" type="text" maxlength="16" pInputText [(ngModel)]="playerToAdd.name" /></h1> 
       </div>
-      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" pInputText [(ngModel)]="playerToAdd.overallSmp" *ngIf="smpMode && addPlayerDisplay" />
+      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" maxlength="16" pInputText [(ngModel)]="playerToAdd.overallSmp" *ngIf="smpMode && addPlayerDisplay" />
     </div>
     <div style="display: flex;" *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
         <span class="label">Definición:</span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.finishing" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.finishing" />
         <br>
         <span class="label">Regate: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.dribbling" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.dribbling" />
         <br>            
         <span class="label">Defensa: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.defending" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.defending" />
         <br>
         <span class="label">Posición: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.positioning" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.positioning" />
       </div>
       <div style="width:37%;">
         <span class="label">Pase: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.passing" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.passing" />
         <br>
         <span class="label">Velocidad: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.speed" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.speed" />
         <br>
         <span class="label">Agresividad: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.aggression" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.aggression" />
         <br>
         <span class="label">Visión: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.vision" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.vision" />
       </div>
       <div style="width:30%;">            
         <span class="label">Tecnica: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.technique" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.technique" />
         <br>
         <span class="label">Fuerza: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.strength" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.strength" />
         <br>
-        <span class="label">Resistencia: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.stamina" />           
+        <span class="label">Energia: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.stamina" />           
         <br>
         <span class="label">Actitud: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.composure" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.composure" />
       </div>
     </div>
     
@@ -260,7 +260,7 @@
     <div class="player-header" style="width: 100%;">
       <div style="display: flex;margin-left: 0px;min-width: 480px;">
         <h1 style="min-width: 120px;font-size: 2rem!important;">
-          <input placeholder="Name" type="text" pInputText [(ngModel)]="teamToAdd.name" /></h1> 
+          <input placeholder="Name" type="text" maxlength="16" pInputText [(ngModel)]="teamToAdd.name" /></h1> 
       </div>
     </div>
     
@@ -273,49 +273,49 @@
     <div class="player-header" style="width: 100%;">
       <div style="display: flex;margin-left: 0px;min-width: 480px;">
         <h1 style="min-width: 120px;font-size: 2rem!important;">
-          <input placeholder="Name" type="text" pInputText [(ngModel)]="playerToDuplicate.name" /></h1> 
+          <input placeholder="Name" type="text" maxlength="16" pInputText [(ngModel)]="playerToDuplicate.name" /></h1> 
       </div>
-      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" pInputText [(ngModel)]="playerToDuplicate.overallSmp" *ngIf="smpMode && duplicatePlayerDisplay" />
+      <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" maxlength="16" pInputText [(ngModel)]="playerToDuplicate.overallSmp" *ngIf="smpMode && duplicatePlayerDisplay" />
     </div>
     <div style="display: flex;"  *ngIf="!smpMode">
       <div style="width:37%;display: block !important;">
         <span class="label">Definición:</span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.finishing" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.finishing" />
         <br>
         <span class="label">Regate: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.dribbling" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.dribbling" />
         <br>            
         <span class="label">Defensa: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.defending" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.defending" />
         <br>
         <span class="label">Posición: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.positioning" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.positioning" />
       </div>
       <div style="width:37%;">
         <span class="label">Pase: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.passing" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.passing" />
         <br>
         <span class="label">Velocidad: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.speed" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.speed" />
         <br>
         <span class="label">Agresividad: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.aggression" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.aggression" />
         <br>
         <span class="label">Visión: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.vision" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.vision" />
       </div>
       <div style="width:30%;">            
         <span class="label">Tecnica: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.technique" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.technique" />
         <br>
         <span class="label">Fuerza: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.strength" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.strength" />
         <br>
-        <span class="label">Resistencia: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.stamina" />           
+        <span class="label">Energia: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.stamina" />           
         <br>
         <span class="label">Actitud: </span>
-        <input type="text" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.composure" />
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.composure" />
       </div>
     </div>
     
@@ -347,7 +347,7 @@
 <p-dialog [(visible)]="viewTeams && editTeamDisplay" [closable]="true" (onHide)="closeEditTeam()" [draggable]="false" *ngIf="teamToEdit">
     <div class="player-card-dialog">
       <h1 style="min-width: 120px;font-size: 2rem!important;color: black!important;margin-top: 20px!important; display: grid; grid-template-columns: repeat(2, 1fr);max-width: 380px!important;">
-        <input placeholder="Name" type="text" pInputText [(ngModel)]="teamToEdit.name"  style="width: 350px;"/>        
+        <input placeholder="Name" type="text" maxlength="16" pInputText [(ngModel)]="teamToEdit.name"  style="width: 350px;"/>        
         <button pButton class="save" style="width: 50px;height: 45px;margin-left: 10px !important;margin-top: 2px !important;margin-right: 0px !important;font-size: 1.4rem;"
         (click)="updateTeam()" type="button"><i class="pi pi-save"></i></button>
       </h1>
@@ -382,7 +382,7 @@
     <div class="player-card-dialog"> 
       <div style="display: flex;margin-top: 15px;">
         <input placeholder="ID" type="number" pInputNumber [(ngModel)]="this.userToAdd" style="  width: 60px; height: 50px;"/>
-        <input placeholder="Name" type="text"  [(ngModel)]="this.userNameToAdd" style="height: 50px;  margin-left: 20px;"/>
+        <input placeholder="Name" type="text" maxlength="16"  [(ngModel)]="this.userNameToAdd" style="height: 50px;  margin-left: 20px;"/>
       </div>
       <div style="display: flex;margin-top: 25px;">
         <button pButton class="save" style="margin-left: 320px!important;margin-right: 2px!important;width: 100px;"

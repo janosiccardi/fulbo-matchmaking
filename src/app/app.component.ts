@@ -151,7 +151,7 @@ export class AppComponent {
         if(error.error == "This player already exist!"){
           alert(error.error);
         }else if (error.error.error == "Bad Request"){           
-          alert("Debe ingresar numeros");
+          alert("Debe ingresar numeros entre 1 y 99");
         }else{
           this.playerToAdd = new Player();
           this.addPlayerDisplay = false;
@@ -159,7 +159,7 @@ export class AppComponent {
         this.getPlayers();
       });
     }else{                
-      alert("Debe ingresar numeros");
+      alert("Debe ingresar numeros entre 1 y 99");
     }
   }
 
@@ -192,7 +192,7 @@ export class AppComponent {
         if(error.error == "This player already exist!"){
           alert(error.error);
         }else if (error.error.error == "Bad Request"){           
-          alert("Debe ingresar numeros");
+          alert("Debe ingresar numeros entre 1 y 99");
         }else{     
         this.duplicatePlayerDisplay = false;
         this.playerToDuplicate = new Player();
@@ -200,7 +200,7 @@ export class AppComponent {
         }
       });
     }else{                
-      alert("Debe ingresar numeros");
+      alert("Debe ingresar numeros entre 1 y 99");
     }
 
   }
@@ -218,20 +218,20 @@ export class AppComponent {
   
   validateFields(player: Player) {
     if(!this.smpMode){
-      return !(player.finishing == null || (player.finishing + '') == '' ||
-          player.passing == null || (player.passing + '') == '' ||
-          player.technique == null || (player.technique + '') == '' ||
-          player.dribbling == null || (player.dribbling + '') == '' ||
-          player.speed == null || (player.speed + '') == '' ||
-          player.strength == null || (player.strength + '') == '' ||
-          player.stamina == null || (player.stamina + '') == '' ||
-          player.defending == null || (player.defending + '') == '' ||
-          player.aggression == null || (player.aggression + '') == '' ||
-          player.positioning == null ||(player.positioning + '') == '' ||
-          player.vision == null || (player.vision + '') == '' ||
-          player.composure == null || (player.composure + '') == '');
+      return !(player.finishing == null || (player.finishing + '') == '' || player.finishing < 1 || player.finishing > 99 ||
+          player.passing == null || (player.passing + '') == '' || player.passing < 1 || player.passing > 99 ||
+          player.technique == null || (player.technique + '') == '' || player.technique < 1 || player.technique > 99 ||
+          player.dribbling == null || (player.dribbling + '') == '' || player.dribbling < 1 || player.dribbling > 99 ||
+          player.speed == null || (player.speed + '') == '' || player.speed < 1 || player.speed > 99 ||
+          player.strength == null || (player.strength + '') == '' || player.strength < 1 || player.strength > 99 ||
+          player.stamina == null || (player.stamina + '') == '' || player.stamina < 1 || player.stamina > 99 ||
+          player.defending == null || (player.defending + '') == '' || player.defending < 1 || player.defending > 99 ||
+          player.aggression == null || (player.aggression + '') == '' || player.aggression < 1 || player.aggression > 99 ||
+          player.positioning == null ||(player.positioning + '') == '' || player.positioning < 1 || player.positioning > 99 ||
+          player.vision == null || (player.vision + '') == '' || player.vision < 1 || player.vision > 99 ||
+          player.composure == null || (player.composure + '') == '' || player.composure < 1 || player.composure > 99 );
     }else{
-      return player.overallSmp != null && (player.overallSmp + '') != '';
+      return player.overallSmp != null && (player.overallSmp + '') != '' && player.overallSmp > 1 && player.overallSmp < 99;
     }
   }
 
@@ -245,11 +245,11 @@ export class AppComponent {
         this.editPlayerDisplay = false;
       },error =>{
         if (error.error.error == "Bad Request"){           
-          alert("Debe ingresar numeros");
+          alert("Debe ingresar numeros entre 1 y 99");
         }
       });
     }else{                
-      alert("Debe ingresar numeros");
+      alert("Debe ingresar numeros entre 1 y 99");
     }
   }
   public viewPlayer(){
