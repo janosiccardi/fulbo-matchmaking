@@ -151,7 +151,7 @@ export class AppComponent {
         if(error.error == "This player already exist!"){
           alert(error.error);
         }else if (error.error.error == "Bad Request"){           
-          alert("Debe ingresar numeros entre 1 y 99");
+          alert("Debe ingresar nombre y/o numeros entre 1 y 99");
         }else{
           this.playerToAdd = new Player();
           this.addPlayerDisplay = false;
@@ -159,7 +159,7 @@ export class AppComponent {
         this.getPlayers();
       });
     }else{                
-      alert("Debe ingresar numeros entre 1 y 99");
+      alert("Debe ingresar nombre y/o numeros entre 1 y 99");
     }
   }
 
@@ -192,7 +192,7 @@ export class AppComponent {
         if(error.error == "This player already exist!"){
           alert(error.error);
         }else if (error.error.error == "Bad Request"){           
-          alert("Debe ingresar numeros entre 1 y 99");
+          alert("Debe ingresar nombre y/o numeros entre 1 y 99");
         }else{     
         this.duplicatePlayerDisplay = false;
         this.playerToDuplicate = new Player();
@@ -200,7 +200,7 @@ export class AppComponent {
         }
       });
     }else{                
-      alert("Debe ingresar numeros entre 1 y 99");
+      alert("Debe ingresar nombre y/o numeros entre 1 y 99");
     }
 
   }
@@ -229,9 +229,9 @@ export class AppComponent {
           player.aggression == null || (player.aggression + '') == '' || player.aggression < 1 || player.aggression > 99 ||
           player.positioning == null ||(player.positioning + '') == '' || player.positioning < 1 || player.positioning > 99 ||
           player.vision == null || (player.vision + '') == '' || player.vision < 1 || player.vision > 99 ||
-          player.composure == null || (player.composure + '') == '' || player.composure < 1 || player.composure > 99 );
+          player.composure == null || (player.composure + '') == '' || player.composure < 1 || player.composure > 99 ) && player.name != null && player.name.trim() != '';
     }else{
-      return player.overallSmp != null && (player.overallSmp + '') != '' && player.overallSmp > 1 && player.overallSmp < 99;
+      return player.overallSmp != null && (player.overallSmp + '') != '' && player.overallSmp > 1 && player.overallSmp < 99 && player.name != null && player.name.trim() != '';
     }
   }
 
@@ -245,11 +245,11 @@ export class AppComponent {
         this.editPlayerDisplay = false;
       },error =>{
         if (error.error.error == "Bad Request"){           
-          alert("Debe ingresar numeros entre 1 y 99");
+          alert("Debe ingresar nombre y/o numeros entre 1 y 99");
         }
       });
     }else{                
-      alert("Debe ingresar numeros entre 1 y 99");
+      alert("Debe ingresar nombre y/o numeros entre 1 y 99");
     }
   }
   public viewPlayer(){
