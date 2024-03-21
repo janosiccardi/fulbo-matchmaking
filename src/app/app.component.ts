@@ -114,18 +114,15 @@ export class AppComponent {
       this.players.sort((a, b) => a.name.localeCompare(b.name));     
       this.players.push(new Player());      
       this.players.forEach((value) => {
-        if(value.name == "Overall" && value.team == 1){
+        if(value.name == "#Overall" && value.team == 1){
          this.overall = value;
-         const index = this.players.indexOf(value);
-         this.players.splice(index);
-         this.players.unshift(value);
         }
       });
     });
   }
 
   public getOvl(player :Player){
-    if(this.smpMode || player.name == "Overall"){
+    if(this.smpMode || player.name == "#Overall"){
       if(player.overallSmp == null || (player.overallSmp + '') == ''){
          return '0.0';
       }else{
@@ -265,7 +262,7 @@ export class AppComponent {
     this.viewMenu= false; 
     this.optionsPlayers = [];
     for(let p of this.players){
-      if(p.finishing != null && p.passing != null){
+      if(p.finishing != null && p.passing != null && p.name != '#Overall'){
         this.optionsPlayers.push(p);
       }
     }
@@ -412,7 +409,7 @@ export class AppComponent {
   }
 
   isOverall(name: string): boolean{
-    if(name == "Overall"){
+    if(name == "#Overall"){
         return this.selectedTeam == 1 && this.adminTeam;
     }else{
       return true;
