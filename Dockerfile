@@ -16,7 +16,7 @@ COPY . .
 RUN npm install -g @angular/cli
 
 # Build the Angular app for production
-RUN ng build --prod
+RUN ng build 
 
 # Use a smaller, production-ready image as the final image
 #FROM nginx:alpine
