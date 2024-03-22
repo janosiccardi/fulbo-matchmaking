@@ -22,8 +22,8 @@ FROM nginx:alpine
 # Copy the production-ready Angular app to the Nginx webserver's root directory
 COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8100
+EXPOSE 8100
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
