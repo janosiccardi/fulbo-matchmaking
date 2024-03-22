@@ -19,13 +19,13 @@ RUN npm install -g @angular/cli
 RUN ng build --prod
 
 # Use a smaller, production-ready image as the final image
-FROM nginx:alpine
+#FROM nginx:alpine
 
 # Copy the production-ready Angular app to the Nginx webserver's root directory
-COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
+#COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
 
-# Expose port 8100
-EXPOSE 8100
+# Expose port 4200
+EXPOSE 4200
 
 # Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["ng", "serve"]
