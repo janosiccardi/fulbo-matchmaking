@@ -6,6 +6,7 @@
     <div class="spacer"></div>      
     
 
+    <button pButton class="header-button" title="Recargar" (click)="getPlayers()" type="button"  *ngIf="this.viewMenu && this.players.length > 1"><i class="pi pi-refresh"></i></button>
     <button pButton class="header-button" title="ID" (click)="showId()" type="button"  *ngIf="this.account"><i class="pi pi-info-circle"></i></button>
     <span *ngIf="!login && !viewTeams">Modo simple:  </span>
     <p-inputSwitch  (onChange)="saveMode()" class="switch-mode" [disabled]="this.editPlayerDisplay" [(ngModel)]="smpMode"  *ngIf="!login && !viewTeams"></p-inputSwitch>
