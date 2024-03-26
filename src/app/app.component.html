@@ -17,18 +17,24 @@
 <div class="content" role="main">
   <div *ngIf="viewMenu" class="players"> 
     <div style="width:30%;max-width: 560px; margin-right: 90px;" *ngFor="let player of players; let i = index" [attr.data-index]="i">
-      <div class="player-card" *ngIf="player.finishing && (isOverall(player.name))" [ngStyle]="{'background-color': player.name == '#Overall'? '#11595c':'#3a3a3a'}">
+      <div class="player-card" *ngIf="player.finishing && (isOverall(player.name))" [ngStyle]="{'background-color': player.name == '#Overall'? '#D4AF37': player.goalkeeper? '#11595c': '#3a3a3a'}">
         <div class="player-header">
         
-        <div style="display: flex;margin-left: 0px;min-width: 350px;">
+        <div style="display: flex;margin-left: 0px;min-width: 325px;">
           <h1 ><span> {{player.name + ' '}}</span></h1> 
           <button *ngIf="adminTeam && player.name != '#Overall'" pButton class="player-button" title="Eliminar" style="margin-left: 7px!important;" (click)="deleteDialog(player,i)" type="button"><i class="pi pi-trash"></i></button>
           <button *ngIf="adminTeam" pButton class="player-button" title="Editar" (click)="editPlayer(player)" type="button"><i class="pi pi-user-edit"></i></button>
           <button *ngIf="adminTeam && player.name != '#Overall'" pButton class="player-button" title="Duplicar" (click)="duplicate(player)" type="button"><i class="pi pi-users"></i></button>
         </div>
-        <h1><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'5px'}">{{getOvl(player) == '100.0'? '99.9' : getOvl(player)}}</span></h1>
+        <div style="display: flex;margin-left: 0px;">          
+                <button *ngIf="adminTeam && player.goalkeeper" [disabled]="this.editPlayerDisplay" pButton class="player-button" title="Goalkeeper" (click)="changeMode(player)" type="button">
+                  <img src="https://i.imgur.com/03uQdWg.png" style="width : 75% ; height : 75%;margin-right: 4px;"></button>
+                  <button *ngIf="adminTeam && !player.goalkeeper"  [disabled]="this.editPlayerDisplay" pButton class="player-button" title="Player" (click)="changeMode(player)" type="button">
+                    <img src="https://i.imgur.com/LTZY9aP.png" style="width : 75% ; height : 75%;margin-right: 4px;"></button>
+                <h1><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'5px'}">{{getOvl(player) == '100.0'? '99.9' : getOvl(player)}}</span></h1>
         </div>
-        <div style="display: flex;" *ngIf="!smpMode">
+        </div>
+        <div style="display: flex;" *ngIf="!smpMode && !player.goalkeeper">
           <div style="width:37%;display: block !important;">
             <span class="label">Definición: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.finishing)}">{{player.finishing}}</span>
             <br>
@@ -55,6 +61,26 @@
             <span class="label">Energia: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.stamina)}">{{player.stamina}}</span>            
             <br>
             <span class="label">Actitud: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.composure)}">{{player.composure}}</span>
+          </div>
+        </div>
+        <div style="display: flex;" *ngIf="!smpMode && player.goalkeeper">
+          <div style="width:37%;display: block !important;  margin-top: 9px;  margin-bottom: 10px;margin-left: 5%;">
+            <span class="label">Posicion: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.positioning2)}">{{player.positioning2}}</span>
+            <br>
+            <span class="label"> </span><span class="stat"><br></span>
+            <span class="label">Agarre: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.handling)}">{{player.handling}}</span>
+          </div>
+          <div style="width:37%;  margin-top: 9px;  margin-bottom: 10px;">
+            <span class="label">Reflejos: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.reflex)}">{{player.reflex}}</span>
+            <br>
+            <span class="label"> </span><span class="stat"><br></span>
+            <span class="label">Despeje: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.rejection)}">{{player.rejection}}</span>
+          </div>
+          <div style="width:25%;  margin-top: 9px;  margin-bottom: 10px;">           
+            <span class="label">Estirada: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.diving)}">{{player.diving}}</span>
+            <br>
+            <span class="label"> </span><span class="stat"><br></span>
+            <span class="label">Saque: </span><span class="stat" [ngStyle]="{'color':getMediaColor(player.kicking)}">{{player.kicking}}</span>
           </div>
         </div>
       </div> 
@@ -115,21 +141,29 @@
       <h1 style="margin-top: 20px;">Seleccione los jugadores:</h1>
       <p-listbox [options]="optionsPlayers" [(ngModel)]="selectedPlayers" [metaKeySelection]="false" [checkbox]="true"
        [filter]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'500px'}" [style]="{'width':'100%'}"
-       emptyFilterMessage="Escribí bien mogólico">
+       emptyFilterMessage="">
         <ng-template let-player pTemplate="item">
             <div class="country-item" *ngIf="player.finishing">               
-              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'225px'}">{{getOvl(player)}}</span></div>
+              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span>
+                <span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'210px'}">
+                  <img *ngIf="player.goalkeeper" src="https://i.imgur.com/RiAovGN.png" style="width : 5% ; height : 5%; margin-right: 4px;">
+                  <img *ngIf="!player.goalkeeper" src="https://i.imgur.com/slqBHX2.png" style="width : 5% ; height : 5%; margin-right: 4px;">
+                  {{getOvl(player)}}</span></div>
             </div>
         </ng-template>
     </p-listbox>
     </div>
-    <button pButton class="generateButton" [disabled]="selectedPlayers.length!=16 && selectedPlayers.length!=14 && selectedPlayers.length!=12 && selectedPlayers.length!=10 && selectedPlayers.length != 8 && selectedPlayers.length != 12" (click)="generateTeams()" type="button">Generar Equipos</button>
-    <div class="subcard" style="margin-top: 0px;" *ngIf="asingTeam">
-      <h1 style="margin-top: 20px;" *ngIf="team1.length != 0">Equipo 1: <span [ngStyle]="{'color':getMediaColor(score1),'padding-left':'270px'}">{{score1.toFixed(1)}}</span></h1>
+    <button pButton class="generateButton" [disabled]="selectedPlayers.length!=14 && selectedPlayers.length!=12 && selectedPlayers.length!=10 && selectedPlayers.length != 8 " (click)="generateTeams()" type="button">Generar Equipos</button>
+    <div class="subcard" style="margin-top: 0px;padding-bottom: 20px;" *ngIf="asingTeam">
+      <h1 style="margin-top: 10px;" *ngIf="team1.length != 0">Equipo 1: <span [ngStyle]="{'color':getMediaColor(score1),'padding-left':'270px'}">{{score1.toFixed(1)}}</span></h1>
       <p-listbox [options]="team1" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}">        
         <ng-template let-player pTemplate="item">
           <div class="country-item">               
-              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'270px'}">{{getOvl(player)}}</span></div>
+              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span>
+                <span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'250px'}">
+                  <img *ngIf="player.goalkeeper" src="https://i.imgur.com/RiAovGN.png" style="width : 5% ; height : 5%; margin-right: 4px;">
+                  <img *ngIf="!player.goalkeeper" src="https://i.imgur.com/slqBHX2.png" style="width : 5% ; height : 5%; margin-right: 4px;">
+                  {{getOvl(player)}}</span></div>
           </div>
       </ng-template>
       </p-listbox>
@@ -137,7 +171,11 @@
       <p-listbox [options]="team2" *ngIf="team1.length != 0" optionLabel="name" [listStyle]="{'max-height':'300px'}" [style]="{'width':'100%'}">             
         <ng-template let-player pTemplate="item">
           <div class="country-item">               
-              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span><span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'270px'}">{{getOvl(player)}}</span></div>
+              <div><span style="min-width: 100px!important;display: inline-block!important;">{{player.name}}</span>
+                <span [ngStyle]="{'color':getMediaColorText(getOvl(player)),'padding-left':'250px'}">
+                  <img *ngIf="player.goalkeeper" src="https://i.imgur.com/RiAovGN.png" style="width : 5% ; height : 5%; margin-right: 4px;">
+                  <img *ngIf="!player.goalkeeper" src="https://i.imgur.com/slqBHX2.png" style="width : 5% ; height : 5%; margin-right: 4px;">
+                  {{getOvl(player)}}</span></div>
           </div>
       </ng-template>
       </p-listbox>
@@ -146,7 +184,7 @@
   </div> 
 
 </div>
-<p-dialog [(visible)]="editPlayerDisplay" [closable]="false" [draggable]="false" [resizable]="false" *ngIf="playerToEdit">
+<p-dialog [(visible)]="editPlayerDisplay" [closable]="true" [draggable]="false" [resizable]="false" *ngIf="playerToEdit">
   <div class="player-card-dialog">
     <div class="player-header" style="width: 100%;">
       <div style="display: flex;margin-left: 0px;min-width: 480px;">
@@ -155,7 +193,7 @@
       <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" maxlength="16" pInputText [(ngModel)]="playerToEdit.overallSmp" 
       *ngIf="(smpMode || playerToEdit.name == '#Overall') && editPlayerDisplay" />
     </div>
-    <div style="display: flex;" *ngIf="!smpMode">
+    <div style="display: flex;" *ngIf="!smpMode && !playerToEdit.goalkeeper">
       <div style="width:37%;display: block !important;">
         <span class="label">Definición:</span>
         <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.finishing" />
@@ -196,6 +234,38 @@
         <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.composure" />
       </div>
     </div>
+    <div style="display: flex;" *ngIf="!smpMode && playerToEdit.goalkeeper">
+      <div style="width:37%;display: block !important;">
+        <br>
+        <span class="label">Posicion: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.positioning2" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Agarre: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.handling" />
+      </div>
+      <div style="width:37%;">
+        <br>
+        <span class="label">Reflejos: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.reflex" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Despeje: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.rejection" />
+      </div>
+      <div style="width:30%;">            
+        <br>
+        <span class="label">Estirada: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.diving" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Saque: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToEdit.kicking" />
+      </div>
+    </div>
     
     <button pButton class="save"  style="width: 100px;margin-left: 450px;" [disabled]="!validateFields(playerToEdit)" (click)="updatePlayer()" type="button">Guardar</button>
   </div> 
@@ -207,10 +277,16 @@
       <div style="display: flex;margin-left: 0px;min-width: 480px;">
         <h1 style="min-width: 120px;font-size: 2rem!important;">
           <input placeholder="Name" type="text" maxlength="16" pInputText [(ngModel)]="playerToAdd.name" /></h1> 
+          <button *ngIf="addPlayerDisplay && playerToAdd.goalkeeper" [disabled]="this.editPlayerDisplay" pButton class="player-button" title="Goalkeeper"
+          (click)="changeModeLocal(playerToAdd)" type="button">
+           <img src="https://i.imgur.com/03uQdWg.png" style="width : 100% ; height : 100%;margin: 8px;"></button>
+           <button *ngIf="addPlayerDisplay  && !playerToAdd.goalkeeper" [disabled]="this.editPlayerDisplay" pButton class="player-button" title="Player"
+            (click)="changeModeLocal(playerToAdd)" type="button">
+             <img src="https://i.imgur.com/LTZY9aP.png" style="width : 100% ; height : 100%;margin: 8px;"></button>
       </div>
       <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" maxlength="16" pInputText [(ngModel)]="playerToAdd.overallSmp" *ngIf="smpMode && addPlayerDisplay" />
     </div>
-    <div style="display: flex;" *ngIf="!smpMode">
+    <div style="display: flex;" *ngIf="!smpMode  && !playerToAdd.goalkeeper">
       <div style="width:37%;display: block !important;">
         <span class="label">Definición:</span>
         <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.finishing" />
@@ -251,6 +327,38 @@
         <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.composure" />
       </div>
     </div>
+    <div style="display: flex;" *ngIf="!smpMode  && playerToAdd.goalkeeper">
+      <div style="width:37%;display: block !important;">
+        <br>
+        <span class="label">Posicion: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.positioning2" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Agarre: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.handling" />
+      </div>
+      <div style="width:37%;">
+        <br>
+        <span class="label">Reflejos: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.reflex" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Despeje: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.rejection" />
+      </div>
+      <div style="width:30%;">          
+        <br>
+        <span class="label">Estirada: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.diving" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Saque: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToAdd.kicking" />
+      </div>
+    </div>
     
     <button pButton class="save"  style="width: 100px;margin-left: 450px;" (click)="addPlayer()" type="button">Agregar</button>
   </div> 
@@ -275,10 +383,16 @@
       <div style="display: flex;margin-left: 0px;min-width: 480px;">
         <h1 style="min-width: 120px;font-size: 2rem!important;">
           <input placeholder="Name" type="text" maxlength="16" pInputText [(ngModel)]="playerToDuplicate.name" /></h1> 
+          <button *ngIf="duplicatePlayerDisplay && playerToDuplicate.goalkeeper" [disabled]="this.editPlayerDisplay" pButton class="player-button" title="Goalkeeper"
+           (click)="changeModeLocal(playerToDuplicate)" type="button">
+            <img src="https://i.imgur.com/03uQdWg.png" style="width : 100% ; height : 100%;margin: 8px;"></button>
+            <button *ngIf="duplicatePlayerDisplay  && !playerToDuplicate.goalkeeper" [disabled]="this.editPlayerDisplay" pButton class="player-button" title="Player"
+             (click)="changeModeLocal(playerToDuplicate)" type="button">
+              <img src="https://i.imgur.com/LTZY9aP.png" style="width : 100% ; height : 100%;margin: 8px;"></button>
       </div>
       <input style="width: 60px;height: 50px;margin-top: 4px;font-size: 1.4rem!important;" placeholder="99" type="text" maxlength="16" pInputText [(ngModel)]="playerToDuplicate.overallSmp" *ngIf="smpMode && duplicatePlayerDisplay" />
     </div>
-    <div style="display: flex;"  *ngIf="!smpMode">
+    <div style="display: flex;"  *ngIf="!smpMode && !playerToDuplicate.goalkeeper">
       <div style="width:37%;display: block !important;">
         <span class="label">Definición:</span>
         <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.finishing" />
@@ -317,6 +431,38 @@
         <br>
         <span class="label">Actitud: </span>
         <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.composure" />
+      </div>
+    </div>
+    <div style="display: flex;"  *ngIf="!smpMode && playerToDuplicate.goalkeeper">
+      <div style="width:37%;display: block !important;">
+        <br>
+        <span class="label">Posicion: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.positioning2" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Agarre: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.handling" />
+      </div>
+      <div style="width:37%;">
+        <br>
+        <span class="label">Reflejos: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.reflex" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Despeje: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.rejection" />
+      </div>
+      <div style="width:30%;">            
+        <br>
+        <span class="label">Estirada: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.diving" />
+        <br>            
+        <span class="label"><br></span>
+        <br>
+        <span class="label">Saque: </span>
+        <input type="text" maxlength="16" pInputText style="width:22%; font-size:0.8rem!important;height: 21%!important;" [(ngModel)]="playerToDuplicate.kicking" />
       </div>
     </div>
     

@@ -23,6 +23,15 @@ export class  Player {
 
     overall: number;
     overallSmp : number;
+
+    //goalkeeper
+    goalkeeper : boolean;
+    handling: number;
+    diving: number;
+    positioning2: number;
+    kicking: number;
+    reflex: number;  
+    rejection: number;  
     
     team: number;
 }

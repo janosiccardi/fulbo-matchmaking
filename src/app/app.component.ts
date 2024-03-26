@@ -121,6 +121,17 @@ export class AppComponent {
     });
   }
 
+ 
+  public changeMode(player: Player){
+    this.changeModeLocal(player);
+    this.updatePlayer();
+  }
+
+  public changeModeLocal(player: Player){
+   player.goalkeeper = !player.goalkeeper;
+   this.playerToEdit = player;
+ }
+
   public getOvl(player :Player){
     if(this.smpMode || player.name == "#Overall"){
       if(player.overallSmp == null || (player.overallSmp + '') == ''){
@@ -178,6 +189,13 @@ export class AppComponent {
     p.positioning = player.positioning;
     p.vision = player.vision;
     p.composure = player.composure;
+    p.diving = player.diving;
+    p.handling = player.handling;
+    p.kicking = player.kicking;
+    p.positioning2 = player.positioning2;
+    p.reflex = player.reflex;
+    p.rejection = player.rejection;
+    p.goalkeeper = player.goalkeeper;
     p.overallSmp = player.overallSmp;
     this.playerToDuplicate = p;
     this.duplicatePlayerDisplay = true;
@@ -217,7 +235,10 @@ export class AppComponent {
   }
   
   validateFields(player: Player) {
-    if(!this.smpMode){
+    if(player.name == "#Overall"){
+      return true;
+    }
+    if(!this.smpMode && !player.goalkeeper){
       return !(player.finishing == null || (player.finishing + '') == '' || player.finishing < 1 || player.finishing > 99 ||
           player.passing == null || (player.passing + '') == '' || player.passing < 1 || player.passing > 99 ||
           player.technique == null || (player.technique + '') == '' || player.technique < 1 || player.technique > 99 ||
@@ -230,16 +251,22 @@ export class AppComponent {
           player.positioning == null ||(player.positioning + '') == '' || player.positioning < 1 || player.positioning > 99 ||
           player.vision == null || (player.vision + '') == '' || player.vision < 1 || player.vision > 99 ||
           player.composure == null || (player.composure + '') == '' || player.composure < 1 || player.composure > 99 ) && player.name != null && player.name.trim() != '';
-    }else{
-      return player.overallSmp != null && (player.overallSmp + '') != '' && player.overallSmp > 1 && player.overallSmp < 99 && player.name != null && player.name.trim() != '';
     }
+    if(!this.smpMode && player.goalkeeper){
+      return !(player.positioning2 == null || (player.positioning2 + '') == '' || player.positioning2 < 1 || player.positioning2 > 99 ||
+          player.handling == null || (player.handling + '') == '' || player.handling < 1 || player.handling > 99 ||
+          player.kicking == null || (player.kicking + '') == '' || player.kicking < 1 || player.kicking > 99 ||
+          player.diving == null || (player.diving + '') == '' || player.diving < 1 || player.diving > 99 ||
+          player.rejection == null || (player.rejection + '') == '' || player.rejection < 1 || player.rejection > 99 ||
+          player.reflex == null || (player.reflex + '') == '' || player.reflex < 1 || player.reflex > 99 ) && player.name != null && player.name.trim() != '';
+    }
+      return player.overallSmp != null && (player.overallSmp + '') != '' && player.overallSmp > 1 && player.overallSmp < 99 && player.name != null && player.name.trim() != '';
   }
 
   updatePlayer(){    
     this.playerToEdit.team = this.selectedTeam;
     if(this.validateFields(this.playerToEdit)){
       this.playerService.updatePlayer(this.playerToEdit).subscribe(data =>{      
-        this.playerToEdit.overall = this.getOverall(this.playerToEdit);
         this.playerToEdit = new Player();
         this.getPlayers();
         this.editPlayerDisplay = false;
@@ -278,13 +305,8 @@ export class AppComponent {
         this.team2 = data.team2;     
         this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / this.team1.length;
         this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / this.team2.length;
-        if(!this.smpMode){
-          this.team1.sort((a, b) => this.compare(a.overall,b.overall));
-          this.team2.sort((a, b) => this.compare(a.overall,b.overall));
-        }else{
-          this.team1.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
-          this.team2.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
-        }
+        this.team1.sort((a, b) => this.compare(a,b));
+        this.team2.sort((a, b) => this.compare(a,b));        
         this.combinationQty = data.combinationQty;
       }else{
         alert("Nigunga combinación posible!");
@@ -346,7 +368,9 @@ export class AppComponent {
     this.indexToDeleteTeam = -1;
   }
 
-  public compare(a:number, b:number) {
+  public compare(playerA:Player, playerB:Player) {
+    let a = playerA.goalkeeper ? 0 : (!this.smpMode ? playerA.overall : playerA.overallSmp);
+    let b = playerB.goalkeeper ? 0 : (this.smpMode ? playerB.overall : playerB.overallSmp);   
     if (a < b) {
       return 1;
     }
@@ -388,24 +412,16 @@ export class AppComponent {
   public getMediaColor(stat: number){
     return stat < 75? "#white" : stat < 80 ? "#00AA00" : stat < 90 ? "#FFFF00" : stat < 95 ? "#FF8000" : "#FF0000";
   }
-  public getOverall(player: Player): number {
-    return (((player.finishing * 10 + player.passing * 8 + player.dribbling * 9 + player.defending * 9 + 
-      player.speed * 5 + player.strength * 6 + player.stamina * 6 + player.aggression * 1 + player.composure * 5 + 
-      player.positioning * 9 + player.vision * 7 + player.technique * 7) / 12) / 10) +  31.3;
-  }
+
  
   saveMode(){
     this.accountModel.smpMode = this.smpMode;
     this.accountService.save( this.accountModel).subscribe(data => {
       this.smpMode = data.smpMode;
     });
-    if(!this.smpMode){
-      this.team1.sort((a, b) => this.compare(a.overall,b.overall));
-      this.team2.sort((a, b) => this.compare(a.overall,b.overall));
-    }else{
-      this.team1.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
-      this.team2.sort((a, b) => this.compare(a.overallSmp,b.overallSmp));
-    }
+    this.team1.sort((a, b) => this.compare(a,b));
+    this.team2.sort((a, b) => this.compare(a,b));
+    
   }
 
   isOverall(name: string): boolean{
@@ -484,6 +500,17 @@ export class AppComponent {
         }
       });
     }
+  }
+
+
+  invalidGoalkeepers(selectedPlayers: Array<Player>): boolean{
+    let count = 0;
+    selectedPlayers.forEach((player) =>{
+      if(player.goalkeeper){
+          count++;
+      }
+    });
+    return count != 0 && count != 2;
   }
 }
 
