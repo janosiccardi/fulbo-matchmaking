@@ -303,8 +303,8 @@ export class AppComponent {
       if(data != null){
         this.team1 = data.team1;    
         this.team2 = data.team2;     
-        this.score1 = this.team1.reduce((total, person) => total + person.overall, 0) / this.team1.length;
-        this.score2 = this.team2.reduce((total, person) => total + person.overall, 0) / this.team2.length;
+        this.score1 = this.getOverallTeam(this.team1)
+        this.score2 = this.getOverallTeam(this.team2)
         this.team1.sort((a, b) => this.compare(a,b));
         this.team2.sort((a, b) => this.compare(a,b));        
         this.combinationQty = data.combinationQty;
@@ -312,6 +312,15 @@ export class AppComponent {
         alert("Nigunga combinación posible!");
       }
     });
+  }
+
+  getOverallTeam(team : Array<Player>){
+    let total = 0;
+    for(let player of team){
+        total += (this.smpMode ? player.overallSmp : player.overall) - (player.goalkeeper ? 5 : 0);
+      }
+      console.log( total +" - "+ team.length);
+      return total / team.length;    
   }
 
   refresh(): void {
